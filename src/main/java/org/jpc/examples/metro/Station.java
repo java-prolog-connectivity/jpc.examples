@@ -2,19 +2,20 @@ package org.jpc.examples.metro;
 
 import static java.util.Arrays.asList;
 import static org.jpc.LogicEngineProvider.logicEngine;
+import static org.jpc.term.Variable.ANONYMOUS_VAR;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.jpc.term.AbstractTerm;
 import org.jpc.term.Atom;
 import org.jpc.term.Compound;
-import org.jpc.term.TermAdaptable;
 import org.jpc.term.Query;
 import org.jpc.term.Term;
+import org.jpc.term.TermAdaptable;
 import org.jpc.term.Variable;
 import org.jpc.util.LogicUtil;
-import static org.jpc.term.Variable.ANONYMOUS_VAR;
 
 public class Station implements IStation, TermAdaptable {
 
@@ -32,7 +33,7 @@ public class Station implements IStation, TermAdaptable {
 	@Override
 	public String toString() {return name;}
 	
-	public Term asTerm() {
+	public AbstractTerm asTerm() {
 		return new Compound("station", asList(new Atom(name)));
 	}
 	
@@ -44,7 +45,7 @@ public class Station implements IStation, TermAdaptable {
 
 
 	public boolean connected(IStation station) {
-		Term message = new Compound("connected", asList((TermAdaptable)station));
+		AbstractTerm message = new Compound("connected", asList((TermAdaptable)station));
 		Term objectMessage = new Compound("::", asList((TermAdaptable)this, message));
 		Query query = logicEngine.createQuery(objectMessage);
 		return query.hasSolution();
@@ -52,7 +53,7 @@ public class Station implements IStation, TermAdaptable {
 
 
 	public long numberConnections() {
-		Term message = new Compound("connected", asList(ANONYMOUS_VAR));
+		AbstractTerm message = new Compound("connected", asList(ANONYMOUS_VAR));
 		Term objectMessage = new Compound("::", asList((TermAdaptable)this, message));
 		Query query = logicEngine.createQuery(objectMessage);
 		return query.numberOfSolutions();
@@ -90,7 +91,7 @@ public class Station implements IStation, TermAdaptable {
 
 
 	public boolean nearby(IStation station) {
-		Term message = new Compound("nearby", asList((TermAdaptable)station));
+		AbstractTerm message = new Compound("nearby", asList((TermAdaptable)station));
 		Term objectMessage = new Compound("::", asList(asTerm(), message));
 		Query query = logicEngine.createQuery(objectMessage);
 		return query.hasSolution();
@@ -98,7 +99,7 @@ public class Station implements IStation, TermAdaptable {
 
 
 	public long numberNearbyStations() {
-		Term message = new Compound("nearby", asList(ANONYMOUS_VAR));
+		AbstractTerm message = new Compound("nearby", asList(ANONYMOUS_VAR));
 		Term objectMessage = new Compound("::", asList(asTerm(), message));
 		Query query = logicEngine.createQuery(objectMessage);
 		return query.numberOfSolutions();

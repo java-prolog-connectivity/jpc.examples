@@ -9,9 +9,10 @@ import java.util.Map;
 
 import org.jpc.term.Atom;
 import org.jpc.term.Compound;
+import org.jpc.term.Term;
 import org.jpc.term.TermAdaptable;
 import org.jpc.term.Query;
-import org.jpc.term.Term;
+import org.jpc.term.AbstractTerm;
 import org.jpc.term.Variable;
 
 
@@ -22,7 +23,7 @@ public class Metro implements IMetro, TermAdaptable {
 	@Override
 	public String toString() {return "metro";}
 	
-	public Term asTerm() {
+	public AbstractTerm asTerm() {
 		return new Atom("metro");
 	}
 	
@@ -37,7 +38,7 @@ public class Metro implements IMetro, TermAdaptable {
 	@Override
 	public List<ILine> lines() {
 		String lineVarName = "Line";
-		Term message = new Compound("line", asList(new Variable(lineVarName)));
+		AbstractTerm message = new Compound("line", asList(new Variable(lineVarName)));
 		Term objectMessage = new Compound("::", asList((TermAdaptable)this, message));
 		Query query = logicEngine.createQuery(objectMessage);
 		List<Map<String, Term>> solutions = query.allSolutions();
@@ -52,7 +53,7 @@ public class Metro implements IMetro, TermAdaptable {
 	@Override
 	public ILine line(String name) {
 		ILine line = null;
-		Term message = new Compound("line", asList(new Atom(name)));
+		AbstractTerm message = new Compound("line", asList(new Atom(name)));
 		Term objectMessage = new Compound("::", asList(asTerm(), message));
 		Query query = logicEngine.createQuery(objectMessage);
 		if(query.hasSolution())

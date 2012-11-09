@@ -8,9 +8,10 @@ import java.util.Arrays;
 
 import org.jpc.term.Atom;
 import org.jpc.term.Compound;
+import org.jpc.term.Term;
 import org.jpc.term.TermAdaptable;
 import org.jpc.term.Query;
-import org.jpc.term.Term;
+import org.jpc.term.AbstractTerm;
 
 public class Line implements ILine, TermAdaptable {
 
@@ -28,7 +29,7 @@ public class Line implements ILine, TermAdaptable {
 	@Override
 	public String toString() {return name;}
 	
-	public Term asTerm() {
+	public AbstractTerm asTerm() {
 		return new Compound("line", Arrays.asList(new Atom(name)));
 	}
 	
@@ -40,7 +41,7 @@ public class Line implements ILine, TermAdaptable {
 
 
 	public boolean connects(IStation s1, IStation s2) {
-		Term message = new Compound("connects", asList((TermAdaptable)s1,(TermAdaptable)s2));
+		AbstractTerm message = new Compound("connects", asList((TermAdaptable)s1,(TermAdaptable)s2));
 		Term objectMessage = new Compound("::", asList(this, message));
 		Query query = logicEngine.createQuery(objectMessage);
 		return query.hasSolution();
@@ -48,7 +49,7 @@ public class Line implements ILine, TermAdaptable {
 
 
 	public long segments() {
-		Term message = new Compound("connects", asList(ANONYMOUS_VAR, ANONYMOUS_VAR));
+		AbstractTerm message = new Compound("connects", asList(ANONYMOUS_VAR, ANONYMOUS_VAR));
 		Term objectMessage = new Compound("::", asList(this, message));
 		Query query = logicEngine.createQuery(objectMessage);
 		return query.numberOfSolutions();
