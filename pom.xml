@@ -14,7 +14,7 @@
 	<packaging>jar</packaging>
 	<name>JPC Examples</name>
 	<description>Examples illustrating the usage of JPC</description>
-	<url>https://github.com/sergioc78/jpc-examples</url>
+	<url>https://github.com/sergio-castro/jpc-examples</url>
   
   <licenses>
 	    <license>
@@ -24,9 +24,9 @@
   </licenses>
   
   <scm>
-    <connection>scm:git:git@github.com:sergioc78/jpc-examples.git</connection>
-    <developerConnection>scm:git:git@github.com:sergioc78/jpc-examples.git</developerConnection>
-    <url>git@github.com:sergioc78/jpc-examples.git</url>
+    <connection>scm:git:git@github.com:sergio-castro/jpc.examples.git</connection>
+    <developerConnection>scm:git:git@github.com:sergio-castro/jpc.examples.git</developerConnection>
+    <url>git@github.com:sergio-castro/jpc.examples.git</url>
   </scm>
     
   <developers>
@@ -70,6 +70,13 @@
 			<version>[1.7.2,]</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>[1.7.2,]</version>
+			<optional>true</optional>
+		</dependency>
+		
 		<dependency>
 			<groupId>com.github.java-prolog-connectivity</groupId>
 			<artifactId>jpc</artifactId>
@@ -148,7 +155,6 @@
 				<executions>
 					<execution>
 						<id>jar-test-classes</id>
-						<phase>package</phase>
 						<goals>
 							<goal>test-jar</goal>
 						</goals>
