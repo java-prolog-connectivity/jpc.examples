@@ -1,4 +1,4 @@
-package org.jpc.test.examples.metro;
+package org.jpc.examples.metro;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
@@ -8,8 +8,8 @@ import static junit.framework.Assert.assertTrue;
 
 import java.util.List;
 
-import org.jpc.examples.metro.ILine;
-import org.jpc.examples.metro.IStation;
+import org.jpc.examples.metro.Line;
+import org.jpc.examples.metro.Station;
 import org.junit.Test;
 import org.minitoolbox.BeansUtil;
 
@@ -18,8 +18,8 @@ public class TestStation extends AbstractMetroTest {
 
 	@Test
 	public void testAllConnections() {
-		IStation station1 = station("bond_street");
-		List<IStation> connectedStations = station1.connected();
+		Station station1 = station("bond_street");
+		List<Station> connectedStations = station1.connected();
 		assertEquals(connectedStations.size(), 2);
 		
 //		System.out.println("Stations connected to " + station1 + ": " + connectedStations.size());
@@ -27,16 +27,16 @@ public class TestStation extends AbstractMetroTest {
 //			System.out.println("- " + connectedStation);
 //		}
 		
-		IStation station2 = station("inexisting_station");
+		Station station2 = station("inexisting_station");
 		assertEquals(station2.connected().size(), 0);
 	}
 	
 	@Test
 	public void testOneConnection() {
-		IStation station = station("bond_street");
-		ILine line1 = line("central");
-		ILine line2 = line("northern");
-		IStation connectedStation = station.connected(line1);
+		Station station = station("bond_street");
+		Line line1 = line("central");
+		Line line2 = line("northern");
+		Station connectedStation = station.connected(line1);
 		assertNotNull(connectedStation);
 		assertEquals(BeansUtil.getProperty(connectedStation, "name"), "oxford_circus");
 		//System.out.println("The station " + station + " is connected with " + connectedStation + " by means of the line " + line1);
@@ -46,16 +46,16 @@ public class TestStation extends AbstractMetroTest {
 	
 	@Test
 	public void testNumberConnections() {
-		IStation station = station("bond_street");
+		Station station = station("bond_street");
 		assertEquals(station.numberConnections(), 2);
 		//System.out.println("Number of connections of " + station + ": " + station.numberConnections());
 	}
 	
 	@Test
 	public void testIsConnected() {
-		IStation station1 = station("bond_street");
-		IStation station2 = station("oxford_circus");
-		IStation station3 = station("charing_cross");
+		Station station1 = station("bond_street");
+		Station station2 = station("oxford_circus");
+		Station station3 = station("charing_cross");
 		assertTrue(station1.connected(station2));
 		assertFalse(station1.connected(station3));
 	}
@@ -64,8 +64,8 @@ public class TestStation extends AbstractMetroTest {
 	
 	@Test
 	public void testAllNearbyStations() {
-		IStation station = station("bond_street");
-		List<IStation> nearbyStations = station.nearby();
+		Station station = station("bond_street");
+		List<Station> nearbyStations = station.nearby();
 		assertEquals(nearbyStations.size(), 4);
 //		System.out.println("Stations nearby to " + station + ": " + nearbyStations.size());
 //		for(IStation nearbyStation: nearbyStations) {
@@ -76,17 +76,17 @@ public class TestStation extends AbstractMetroTest {
 	
 	@Test
 	public void testNumberNearbyStations() {
-		IStation station = station("bond_street");
+		Station station = station("bond_street");
 		assertEquals(station.numberNearbyStations(), 4);
 		//System.out.println("Number of nearby stations of " + station + ": " + station.numberNearbyStations());
 	}
 	
 	@Test
 	public void testIsNearby() {
-		IStation station1 = station("bond_street");
-		IStation station2 = station("oxford_circus");
-		IStation station3 = station("charing_cross");
-		IStation station4 = station("piccadilly_circus");
+		Station station1 = station("bond_street");
+		Station station2 = station("oxford_circus");
+		Station station3 = station("charing_cross");
+		Station station4 = station("piccadilly_circus");
 		assertTrue(station1.nearby(station2));
 		assertTrue(station1.nearby(station3));
 		assertFalse(station1.nearby(station4));
@@ -96,12 +96,12 @@ public class TestStation extends AbstractMetroTest {
 	
 	@Test
 	public void testIntermediateStations() {
-		IStation station1 = station("bond_street");
-		IStation station2 = station("oxford_circus");
-		IStation station3 = station("piccadilly_circus");
-		IStation station4 = station("inexisting_station");
+		Station station1 = station("bond_street");
+		Station station2 = station("oxford_circus");
+		Station station3 = station("piccadilly_circus");
+		Station station4 = station("inexisting_station");
 		
-		List<IStation> intermediateStations = station1.intermediateStations(station2);
+		List<Station> intermediateStations = station1.intermediateStations(station2);
 		assertEquals(intermediateStations.size(), 0);
 		
 		intermediateStations = station1.intermediateStations(station3);
@@ -117,18 +117,18 @@ public class TestStation extends AbstractMetroTest {
 	
 	@Test
 	public void testNumberReachableStations() {
-		IStation station = station("bond_street");
+		Station station = station("bond_street");
 		assertEquals(station.numberReachableStations(), 22);
 		//System.out.println("Number of reachable stations from " + station + ": " + station.numberReachableStations());
 	}
 	
 	@Test
 	public void testIsReachable() {
-		IStation station1 = station("bond_street");
-		IStation station2 = station("oxford_circus");
-		IStation station3 = station("charing_cross");
-		IStation station4 = station("piccadilly_circus");
-		IStation station5 = station("inexisting_station");
+		Station station1 = station("bond_street");
+		Station station2 = station("oxford_circus");
+		Station station3 = station("charing_cross");
+		Station station4 = station("piccadilly_circus");
+		Station station5 = station("inexisting_station");
 		assertTrue(station1.reachable(station2));
 		assertTrue(station1.reachable(station3));
 		assertTrue(station1.reachable(station4));

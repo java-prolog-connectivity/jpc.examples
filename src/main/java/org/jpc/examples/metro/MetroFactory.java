@@ -1,21 +1,13 @@
 package org.jpc.examples.metro;
 
 
-public class MetroFactory implements IMetroFactory {
 
-	@Override
-	public IStation station(String name) {
-		return new Station(name);
-	}
+public interface MetroFactory {
 	
-	@Override
-	public ILine line(String name) {
-		return new Line(name);
-	}
+	public abstract Metro metro();
 
-	@Override
-	public IMetro metro() {
-		return new Metro();
-	}
+	public abstract Station station(String name);
+
+	public abstract Line line(String name);
 	
 }

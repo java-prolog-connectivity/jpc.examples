@@ -1,9 +1,8 @@
-package org.jpc.test.examples.metro;
+package org.jpc.examples.metro;
 
-import org.jpc.examples.metro.ILine;
-import org.jpc.examples.metro.IMetro;
-import org.jpc.examples.metro.IMetroFactory;
-import org.jpc.examples.metro.IStation;
+import org.jpc.examples.metro.Line;
+import org.jpc.examples.metro.Metro;
+import org.jpc.examples.metro.Station;
 import org.junit.Test;
 
 public class StressTest extends AbstractMetroTest {
@@ -14,9 +13,9 @@ public class StressTest extends AbstractMetroTest {
 	
 	@Test
 	public void testLineConnects_Station_Station() {
-		ILine line1 = line("central");
-		IStation station1 = station("bond_street");
-		IStation station2 = station("oxford_circus");
+		Line line1 = line("central");
+		Station station1 = station("bond_street");
+		Station station2 = station("oxford_circus");
 		
 		long startTime = System.nanoTime();
 		for(int i=0; i<TIMES;i++) {
@@ -28,7 +27,7 @@ public class StressTest extends AbstractMetroTest {
 	
 	@Test
 	public void testLineSegments() {
-		ILine line1 = line("central");
+		Line line1 = line("central");
 		long startTime = System.nanoTime();
 		
 		for(int i=0; i<TIMES;i++) {
@@ -40,8 +39,8 @@ public class StressTest extends AbstractMetroTest {
 	
 	@Test
 	public void testStationConnected_Station() {
-		IStation station1 = station("bond_street");
-		IStation station2 = station("oxford_circus");
+		Station station1 = station("bond_street");
+		Station station2 = station("oxford_circus");
 		
 		long startTime = System.nanoTime();
 		for(int i=0; i<TIMES;i++) {
@@ -59,7 +58,7 @@ public class StressTest extends AbstractMetroTest {
 	
 	@Test
 	public void testStationNumberConnections() {
-		IStation station = station("bond_street");
+		Station station = station("bond_street");
 		
 		long startTime = System.nanoTime();
 		for(int i=0; i<TIMES;i++) {
@@ -71,8 +70,8 @@ public class StressTest extends AbstractMetroTest {
 	
 	@Test
 	public void testStationConnected_Line() {
-		IStation station1 = station("bond_street");
-		ILine line1 = line("central");
+		Station station1 = station("bond_street");
+		Line line1 = line("central");
 		
 		long startTime = System.nanoTime();
 		for(int i=0; i<TIMES;i++) {
@@ -84,7 +83,7 @@ public class StressTest extends AbstractMetroTest {
 	
 	@Test
 	public void testStationConnected() {
-		IStation station1 = station("bond_street");
+		Station station1 = station("bond_street");
 		
 		long startTime = System.nanoTime();
 		for(int i=0; i<TIMES;i++) {
@@ -96,8 +95,8 @@ public class StressTest extends AbstractMetroTest {
 	
 	@Test
 	public void testStationNearby_Station() {
-		IStation station1 = station("bond_street");
-		IStation station2 = station("oxford_circus");
+		Station station1 = station("bond_street");
+		Station station2 = station("oxford_circus");
 		
 		long startTime = System.nanoTime();
 		for(int i=0; i<TIMES;i++) {
@@ -109,7 +108,7 @@ public class StressTest extends AbstractMetroTest {
 	
 	@Test
 	public void testStationNumberNearbyStations() {
-		IStation station1 = station("bond_street");
+		Station station1 = station("bond_street");
 		
 		long startTime = System.nanoTime();
 		for(int i=0; i<TIMES;i++) {
@@ -121,7 +120,7 @@ public class StressTest extends AbstractMetroTest {
 	
 	@Test
 	public void testStationNearby() {
-		IStation station1 = station("bond_street");
+		Station station1 = station("bond_street");
 		
 		long startTime = System.nanoTime();
 		for(int i=0; i<TIMES;i++) {
@@ -133,8 +132,8 @@ public class StressTest extends AbstractMetroTest {
 	
 	@Test
 	public void testStationReachable_Station() {
-		IStation station1 = station("bond_street");
-		IStation station2 = station("oxford_circus");
+		Station station1 = station("bond_street");
+		Station station2 = station("oxford_circus");
 		
 		long startTime = System.nanoTime();
 		for(int i=0; i<TIMES;i++) {
@@ -146,7 +145,7 @@ public class StressTest extends AbstractMetroTest {
 	
 	@Test
 	public void testStationNumberReachableStations() {
-		IStation station1 = station("bond_street");
+		Station station1 = station("bond_street");
 		
 		long startTime = System.nanoTime();
 		for(int i=0; i<TIMES;i++) {
@@ -158,8 +157,8 @@ public class StressTest extends AbstractMetroTest {
 	
 	@Test
 	public void testStationIntermediateStations_Station() {
-		IStation station1 = station("bond_street");
-		IStation station2 = station("oxford_circus");
+		Station station1 = station("bond_street");
+		Station station2 = station("oxford_circus");
 		
 		long startTime = System.nanoTime();
 		for(int i=0; i<TIMES;i++) {
@@ -172,7 +171,7 @@ public class StressTest extends AbstractMetroTest {
 	
 	@Test
 	public void testMetroLines() {
-		IMetro metro = metro();
+		Metro metro = metro();
 		
 		long startTime = System.nanoTime();
 		for(int i=0; i<TIMES;i++) {
@@ -184,7 +183,7 @@ public class StressTest extends AbstractMetroTest {
 	
 	@Test
 	public void testMetroLine_String() {
-		IMetro metro = metro();
+		Metro metro = metro();
 		
 		long startTime = System.nanoTime();
 		for(int i=0; i<TIMES;i++) {

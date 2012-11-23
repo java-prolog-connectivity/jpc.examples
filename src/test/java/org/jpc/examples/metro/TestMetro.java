@@ -1,4 +1,4 @@
-package org.jpc.test.examples.metro;
+package org.jpc.examples.metro;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
@@ -6,8 +6,8 @@ import static junit.framework.Assert.assertNull;
 
 import java.util.List;
 
-import org.jpc.examples.metro.ILine;
-import org.jpc.examples.metro.IMetro;
+import org.jpc.examples.metro.Line;
+import org.jpc.examples.metro.Metro;
 import org.junit.Test;
 
 public class TestMetro extends AbstractMetroTest {
@@ -15,8 +15,8 @@ public class TestMetro extends AbstractMetroTest {
 
 	@Test
 	public void testAllLines() {
-		IMetro metro = metro();
-		List<ILine> lines = metro.lines();
+		Metro metro = metro();
+		List<Line> lines = metro.lines();
 		assertNotNull(lines);
 		assertEquals(lines.size(), 6);
 		
@@ -31,8 +31,8 @@ public class TestMetro extends AbstractMetroTest {
 	
 	@Test
 	public void testIsLine() {
-		IMetro metro = metro();
-		ILine line = metro.line("central");
+		Metro metro = metro();
+		Line line = metro.line("central");
 		assertNotNull(line);
 		//System.out.println("Line: " + line);
 		
