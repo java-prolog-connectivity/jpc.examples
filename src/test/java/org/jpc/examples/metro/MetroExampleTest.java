@@ -6,7 +6,7 @@ import org.jpc.examples.metro.MetroFactory;
 import org.jpc.examples.metro.Station;
 import org.jpc.examples.metro.imp.MetroFactoryImp;
 
-public class AbstractMetroTest {
+public class MetroExampleTest {
 
 	private MetroFactory defaultFactory;
 	

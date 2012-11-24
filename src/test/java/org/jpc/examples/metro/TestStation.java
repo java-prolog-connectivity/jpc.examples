@@ -13,7 +13,7 @@ import org.jpc.examples.metro.Station;
 import org.junit.Test;
 import org.minitoolbox.BeansUtil;
 
-public class TestStation extends AbstractMetroTest {
+public class TestStation extends MetroExampleTest {
 
 
 	@Test

@@ -5,7 +5,7 @@ import org.jpc.examples.metro.Metro;
 import org.jpc.examples.metro.Station;
 import org.junit.Test;
 
-public class StressTest extends AbstractMetroTest {
+public class StressTest extends MetroExampleTest {
 
 	//public static int TIMES = 50000;
 	public static int TIMES = 1;

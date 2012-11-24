@@ -10,7 +10,7 @@ import org.jpc.examples.metro.Line;
 import org.jpc.examples.metro.Metro;
 import org.junit.Test;
 
-public class TestMetro extends AbstractMetroTest {
+public class TestMetro extends MetroExampleTest {
 
 
 	@Test
