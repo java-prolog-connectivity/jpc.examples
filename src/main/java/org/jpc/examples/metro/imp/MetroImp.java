@@ -31,22 +31,22 @@ public class MetroImp implements Metro, TermConvertable {
 		return new Atom("metro");
 	}
 	
-	public static String LOADER = "org/jpc/examples/metro/load_all";
+	public static String LOADER_FILE = "org/jpc/examples/metro/load_all";
 	
 	
 	public static void main(String[] args) {
 		
-		Set<URL> urls = ClasspathHelper.forPackage("logic_lib/examples/metro/load_all.lgt");
+		Set<URL> urls = ClasspathHelper.forPackage(LOADER_FILE);
 		System.out.println(urls);
-		urls = ClasspathHelper.forPackage("logic_lib.examples.metro.load_all.lgt");
+		urls = ClasspathHelper.forPackage(LOADER_FILE);
 		System.out.println(urls);
 		
-		URL url = Thread.currentThread().getContextClassLoader().getResource("logic_lib/examples/metro/load_all.lgt");
+		URL url = Thread.currentThread().getContextClassLoader().getResource(LOADER_FILE+".lgt");
 		System.out.println(url);
 	}
 	
 	public static boolean loadAll() {
-		return new LogicResourceLoader(getLogicEngine()).logtalkLoad(LOADER);
+		return new LogicResourceLoader(getLogicEngine()).logtalkLoad(LOADER_FILE);
 //		Term logtalkLoadTerm = new Compound("logtalk_load", asList(new Atom(LOADER)));
 //		Query query = getLogicEngine().createQuery(logtalkLoadTerm);
 //		return query.hasSolution();

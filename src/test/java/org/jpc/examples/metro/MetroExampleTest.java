@@ -6,6 +6,11 @@ import org.jpc.examples.metro.MetroFactory;
 import org.jpc.examples.metro.Station;
 import org.jpc.examples.metro.imp.MetroFactoryImp;
 
+/**
+ * The base class of the test classes for the metro example
+ * @author sergioc
+ *
+ */
 public class MetroExampleTest {
 
 	private MetroFactory defaultFactory;

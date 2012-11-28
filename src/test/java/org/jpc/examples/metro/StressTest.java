@@ -1,12 +1,18 @@
 package org.jpc.examples.metro;
 
-import org.jpc.examples.metro.Line;
-import org.jpc.examples.metro.Metro;
-import org.jpc.examples.metro.Station;
+import static junit.framework.Assert.assertTrue;
+
+import org.jpc.examples.metro.imp.MetroImp;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class StressTest extends MetroExampleTest {
-
+//
+//	@BeforeClass
+//    public static void oneTimeSetUp() {
+//		assertTrue(MetroImp.loadAll());
+//    }
+	
 	//public static int TIMES = 50000;
 	public static int TIMES = 1;
 	public static long milliSeconds(long start, long end) {return (end - start)/1000000;}
@@ -22,7 +28,7 @@ public class StressTest extends MetroExampleTest {
 			line1.connects(station1, station2);
 		}
 		long endTime = System.nanoTime();
-		System.out.println("(PAPER)*** testLineConnects_Station_Station: "+ milliSeconds(startTime, endTime));
+		//System.out.println("(PAPER)*** testLineConnects_Station_Station: "+ milliSeconds(startTime, endTime));
 	}
 	
 	@Test
@@ -34,7 +40,7 @@ public class StressTest extends MetroExampleTest {
 			line1.segments();
 		}
 		long endTime = System.nanoTime();
-		System.out.println("(PAPER)*** testLineSegments: "+ milliSeconds(startTime, endTime));
+		//System.out.println("(PAPER)*** testLineSegments: "+ milliSeconds(startTime, endTime));
 	}
 	
 	@Test
@@ -53,7 +59,7 @@ public class StressTest extends MetroExampleTest {
 //			}
 		}
 		long endTime = System.nanoTime();
-		System.out.println("*** testStationConnected_Station: "+ milliSeconds(startTime, endTime));
+		//System.out.println("*** testStationConnected_Station: "+ milliSeconds(startTime, endTime));
 	}
 	
 	@Test
@@ -65,7 +71,7 @@ public class StressTest extends MetroExampleTest {
 			station.numberConnections();
 		}
 		long endTime = System.nanoTime();
-		System.out.println("*** testStationNumberConnections: "+ milliSeconds(startTime, endTime));
+		//System.out.println("*** testStationNumberConnections: "+ milliSeconds(startTime, endTime));
 	}
 	
 	@Test
@@ -78,7 +84,7 @@ public class StressTest extends MetroExampleTest {
 			station1.connected(line1);
 		}
 		long endTime = System.nanoTime();
-		System.out.println("(PAPER)*** testStationConnected_Line: "+ milliSeconds(startTime, endTime));
+		//System.out.println("(PAPER)*** testStationConnected_Line: "+ milliSeconds(startTime, endTime));
 	}
 	
 	@Test
@@ -90,7 +96,7 @@ public class StressTest extends MetroExampleTest {
 			station1.connected();
 		}
 		long endTime = System.nanoTime();
-		System.out.println("*** testStationConnected: "+ milliSeconds(startTime, endTime));
+		//System.out.println("*** testStationConnected: "+ milliSeconds(startTime, endTime));
 	}
 	
 	@Test
@@ -103,7 +109,7 @@ public class StressTest extends MetroExampleTest {
 			station1.nearby(station2);
 		}
 		long endTime = System.nanoTime();
-		System.out.println("*** testStationNearby_Station: "+ milliSeconds(startTime, endTime));
+		//System.out.println("*** testStationNearby_Station: "+ milliSeconds(startTime, endTime));
 	}
 	
 	@Test
@@ -115,7 +121,7 @@ public class StressTest extends MetroExampleTest {
 			station1.numberNearbyStations();
 		}
 		long endTime = System.nanoTime();
-		System.out.println("*** testStationNumberNearbyStations: "+ milliSeconds(startTime, endTime));
+		//System.out.println("*** testStationNumberNearbyStations: "+ milliSeconds(startTime, endTime));
 	}
 	
 	@Test
@@ -127,7 +133,7 @@ public class StressTest extends MetroExampleTest {
 			station1.nearby();
 		}
 		long endTime = System.nanoTime();
-		System.out.println("(PAPER)*** testStationNearby: "+ milliSeconds(startTime, endTime));
+		//System.out.println("(PAPER)*** testStationNearby: "+ milliSeconds(startTime, endTime));
 	}
 	
 	@Test
@@ -140,7 +146,7 @@ public class StressTest extends MetroExampleTest {
 			station1.reachable(station2);
 		}
 		long endTime = System.nanoTime();
-		System.out.println("*** testStationReachable_Station: "+ milliSeconds(startTime, endTime));
+		//System.out.println("*** testStationReachable_Station: "+ milliSeconds(startTime, endTime));
 	}
 	
 	@Test
@@ -152,7 +158,7 @@ public class StressTest extends MetroExampleTest {
 			station1.numberReachableStations();
 		}
 		long endTime = System.nanoTime();
-		System.out.println("*** testStationNumberReachableStations: "+ milliSeconds(startTime, endTime));
+		//System.out.println("*** testStationNumberReachableStations: "+ milliSeconds(startTime, endTime));
 	}
 	
 	@Test
@@ -166,7 +172,7 @@ public class StressTest extends MetroExampleTest {
 			station1.intermediateStations(station2);
 		}
 		long endTime = System.nanoTime();
-		System.out.println("(PAPER)*** testStationIntermediateStations_Station: "+ milliSeconds(startTime, endTime));
+		//System.out.println("(PAPER)*** testStationIntermediateStations_Station: "+ milliSeconds(startTime, endTime));
 	}
 	
 	@Test
@@ -178,7 +184,7 @@ public class StressTest extends MetroExampleTest {
 			metro.lines();
 		}
 		long endTime = System.nanoTime();
-		System.out.println("(PAPER)*** testMetroLines: "+ milliSeconds(startTime, endTime));
+		//System.out.println("(PAPER)*** testMetroLines: "+ milliSeconds(startTime, endTime));
 	}
 	
 	@Test
@@ -190,7 +196,7 @@ public class StressTest extends MetroExampleTest {
 			metro.line("central");
 		}
 		long endTime = System.nanoTime();
-		System.out.println("(PAPER)*** testMetroLine_String: "+ milliSeconds(startTime, endTime));
+		//System.out.println("(PAPER)*** testMetroLine_String: "+ milliSeconds(startTime, endTime));
 	}
 	
 
