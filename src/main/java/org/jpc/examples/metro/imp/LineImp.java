@@ -8,12 +8,13 @@ import java.util.Arrays;
 
 import org.jpc.examples.metro.Line;
 import org.jpc.examples.metro.Station;
+import org.jpc.term.AbstractTerm;
 import org.jpc.term.Atom;
 import org.jpc.term.Compound;
+import org.jpc.term.LogtalkObject;
+import org.jpc.term.Query;
 import org.jpc.term.Term;
 import org.jpc.term.TermConvertable;
-import org.jpc.term.Query;
-import org.jpc.term.AbstractTerm;
 
 public class LineImp implements Line, TermConvertable {
 
@@ -44,7 +45,7 @@ public class LineImp implements Line, TermConvertable {
 
 	public boolean connects(Station s1, Station s2) {
 		AbstractTerm message = new Compound("connects", asList((TermConvertable)s1,(TermConvertable)s2));
-		Term objectMessage = new Compound("::", asList(this, message));
+		Term objectMessage = new LogtalkObject(this).sendMessage(message);
 		Query query = getLogicEngine().createQuery(objectMessage);
 		return query.hasSolution();
 	}
@@ -52,7 +53,7 @@ public class LineImp implements Line, TermConvertable {
 
 	public long segments() {
 		AbstractTerm message = new Compound("connects", asList(ANONYMOUS_VAR, ANONYMOUS_VAR));
-		Term objectMessage = new Compound("::", asList(this, message));
+		Term objectMessage = new LogtalkObject(this).sendMessage(message);
 		Query query = getLogicEngine().createQuery(objectMessage);
 		return query.numberOfSolutions();
 	}

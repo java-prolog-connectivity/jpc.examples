@@ -14,6 +14,7 @@ import org.jpc.examples.metro.Metro;
 import org.jpc.term.AbstractTerm;
 import org.jpc.term.Atom;
 import org.jpc.term.Compound;
+import org.jpc.term.LogtalkObject;
 import org.jpc.term.Query;
 import org.jpc.term.Term;
 import org.jpc.term.TermConvertable;
@@ -56,7 +57,7 @@ public class MetroImp implements Metro, TermConvertable {
 	public List<Line> lines() {
 		String lineVarName = "Line";
 		AbstractTerm message = new Compound("line", asList(new Variable(lineVarName)));
-		Term objectMessage = new Compound("::", asList((TermConvertable)this, message));
+		Term objectMessage = new LogtalkObject(this).sendMessage(message);
 		Query query = getLogicEngine().createQuery(objectMessage);
 		List<Map<String, Term>> solutions = query.allSolutions();
 		List<Line> lines = new ArrayList<Line>();
@@ -71,7 +72,7 @@ public class MetroImp implements Metro, TermConvertable {
 	public Line line(String name) {
 		Line line = null;
 		AbstractTerm message = new Compound("line", asList(new Atom(name)));
-		Term objectMessage = new Compound("::", asList(asTerm(), message));
+		Term objectMessage = new LogtalkObject(this).sendMessage(message);
 		Query query = getLogicEngine().createQuery(objectMessage);
 		if(query.hasSolution())
 			line = LineImp.create(message);
