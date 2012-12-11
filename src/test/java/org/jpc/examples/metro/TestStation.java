@@ -20,7 +20,7 @@ public class TestStation extends MetroExampleTest {
 	public void testAllConnections() {
 		Station station1 = station("bond_street");
 		List<Station> connectedStations = station1.connected();
-		assertEquals(connectedStations.size(), 2);
+		assertEquals(2, connectedStations.size());
 		
 //		System.out.println("Stations connected to " + station1 + ": " + connectedStations.size());
 //		for(IStation connectedStation: connectedStations) {
@@ -28,7 +28,7 @@ public class TestStation extends MetroExampleTest {
 //		}
 		
 		Station station2 = station("inexisting_station");
-		assertEquals(station2.connected().size(), 0);
+		assertEquals(0, station2.connected().size());
 	}
 	
 	@Test
@@ -47,7 +47,7 @@ public class TestStation extends MetroExampleTest {
 	@Test
 	public void testNumberConnections() {
 		Station station = station("bond_street");
-		assertEquals(station.numberConnections(), 2);
+		assertEquals(2, station.numberConnections());
 		//System.out.println("Number of connections of " + station + ": " + station.numberConnections());
 	}
 	
@@ -66,7 +66,7 @@ public class TestStation extends MetroExampleTest {
 	public void testAllNearbyStations() {
 		Station station = station("bond_street");
 		List<Station> nearbyStations = station.nearby();
-		assertEquals(nearbyStations.size(), 4);
+		assertEquals(4, nearbyStations.size());
 //		System.out.println("Stations nearby to " + station + ": " + nearbyStations.size());
 //		for(IStation nearbyStation: nearbyStations) {
 //			System.out.println("- " + nearbyStation);
@@ -77,7 +77,7 @@ public class TestStation extends MetroExampleTest {
 	@Test
 	public void testNumberNearbyStations() {
 		Station station = station("bond_street");
-		assertEquals(station.numberNearbyStations(), 4);
+		assertEquals(4, station.numberNearbyStations());
 		//System.out.println("Number of nearby stations of " + station + ": " + station.numberNearbyStations());
 	}
 	
@@ -102,10 +102,10 @@ public class TestStation extends MetroExampleTest {
 		Station station4 = station("inexisting_station");
 		
 		List<Station> intermediateStations = station1.intermediateStations(station2);
-		assertEquals(intermediateStations.size(), 0);
+		assertEquals(0, intermediateStations.size());
 		
 		intermediateStations = station1.intermediateStations(station3);
-		assertEquals(intermediateStations.size(), 1);
+		assertEquals(1, intermediateStations.size());
 		
 //		System.out.println("Intermediate stations from " + station1 + " to " + station3);
 //		for(IStation intermediateStation: intermediateStations) {
@@ -118,7 +118,7 @@ public class TestStation extends MetroExampleTest {
 	@Test
 	public void testNumberReachableStations() {
 		Station station = station("bond_street");
-		assertEquals(station.numberReachableStations(), 22);
+		assertEquals(22, station.numberReachableStations());
 		//System.out.println("Number of reachable stations from " + station + ": " + station.numberReachableStations());
 	}
 	

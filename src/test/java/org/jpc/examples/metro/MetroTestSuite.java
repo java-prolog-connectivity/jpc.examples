@@ -12,6 +12,7 @@ import org.junit.runners.Suite;
 public class MetroTestSuite {
 	@BeforeClass
     public static void oneTimeSetUp() {
-		assertTrue(MetroImp.loadAll());
+		assertTrue(MetroImp.loadAll()); //load logic files
+		MetroImp.importData(); //import data to the logic database from text file
     }
 }
