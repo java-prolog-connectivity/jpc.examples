@@ -14,7 +14,7 @@ import org.jpc.engine.logtalk.LogtalkObject;
 import org.jpc.engine.prolog.Query;
 import org.jpc.examples.metro.Line;
 import org.jpc.examples.metro.Metro;
-import org.jpc.examples.metro.DataLoader;
+import org.jpc.examples.metro.MetroDataLoader;
 import org.jpc.term.AbstractTerm;
 import org.jpc.term.Atom;
 import org.jpc.term.Compound;
@@ -35,32 +35,7 @@ public class MetroImp implements Metro, TermConvertable {
 	public AbstractTerm asTerm() {
 		return new Atom(METRO_FUNCTOR);
 	}
-	
-	public static String LOADER_FILE = "org/jpc/examples/metro/load_all"; //the file extension is optional for Prolog or Logtalk resources
-	public static String DATA_FILE = "org/jpc/examples/metro/data.txt";
-	
-	public static void main(String[] args) {
-		
-		Set<URL> urls = ClasspathHelper.forPackage(LOADER_FILE);
-		System.out.println(urls);
-		urls = ClasspathHelper.forPackage(LOADER_FILE);
-		System.out.println(urls);
-		
-		URL url = Thread.currentThread().getContextClassLoader().getResource(LOADER_FILE+".lgt");
-		System.out.println(url);
-	}
-	
-	public static boolean loadAll() {
-		return new LogicResourceLoader(getLogicEngine()).logtalkLoad(LOADER_FILE);
-//		Term logtalkLoadTerm = new Compound("logtalk_load", asList(new Atom(LOADER)));
-//		Query query = getLogicEngine().createQuery(logtalkLoadTerm);
-//		return query.hasSolution();
-	}
 
-	public static void importData() {
-		File resourceFile = new File(MetroImp.class.getClassLoader().getResource(DATA_FILE).getFile());		
-		new DataLoader(resourceFile, getLogicEngine()).loadData();
-	}
 	
 	@Override
 	public List<Line> lines() {

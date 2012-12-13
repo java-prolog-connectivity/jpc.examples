@@ -1,6 +1,7 @@
 package org.jpc.examples;
 
 import org.jpc.examples.metro.MetroTestSuite;
+import org.jpc.examples.osm.OsmTestSuite;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -11,5 +12,5 @@ import org.junit.runners.Suite.SuiteClasses;
  *
  */
 @RunWith(Suite.class)
-@SuiteClasses({MetroTestSuite.class})
+@SuiteClasses({MetroTestSuite.class, OsmTestSuite.class})
 public class LogtalkExamplesTestSuite {}
