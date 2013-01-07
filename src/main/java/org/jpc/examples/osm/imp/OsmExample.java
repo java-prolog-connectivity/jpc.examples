@@ -1,4 +1,4 @@
-package org.jpc.examples.osm;
+package org.jpc.examples.osm.imp;
 
 import static org.jpc.util.ThreadLocalLogicEngine.getLogicEngine;
 

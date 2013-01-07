@@ -12,5 +12,7 @@ import org.junit.runners.Suite.SuiteClasses;
  *
  */
 @RunWith(Suite.class)
-@SuiteClasses({MetroTestSuite.class, OsmTestSuite.class})
+@SuiteClasses({
+	MetroTestSuite.class, 
+	OsmTestSuite.class})
 public class LogtalkExamplesTestSuite {}
