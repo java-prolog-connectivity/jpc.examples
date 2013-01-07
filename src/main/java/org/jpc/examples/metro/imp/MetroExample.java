@@ -1,4 +1,4 @@
-package org.jpc.examples.metro;
+package org.jpc.examples.metro.imp;
 
 import static org.jpc.util.ThreadLocalLogicEngine.getLogicEngine;
 
@@ -10,13 +10,13 @@ public class MetroExample {
 	
 	public static boolean loadAll() {
 		return new LogicResourceLoader(getLogicEngine()).logtalkLoad(LOADER_FILE);
-//		Term logtalkLoadTerm = new Compound("logtalk_load", asList(new Atom(LOADER)));
+//		Term logtalkLoadTerm = new Compound("logtalk_load", asList(new Atom(LOADER_FILE)));
 //		Query query = getLogicEngine().createQuery(logtalkLoadTerm);
 //		return query.hasSolution();
 	}
 
 	public static void importData() {
-		new MetroDataLoader(getLogicEngine()).load();
+		new SaltMetroDataLoader(getLogicEngine()).load();
 	}
 
 }

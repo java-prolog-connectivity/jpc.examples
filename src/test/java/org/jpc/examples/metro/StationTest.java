@@ -11,9 +11,9 @@ import java.util.List;
 import org.jpc.examples.metro.Line;
 import org.jpc.examples.metro.Station;
 import org.junit.Test;
-import org.minitoolbox.BeansUtil;
+import org.minitoolbox.reflection.BeansUtil;
 
-public class TestStation extends MetroExampleTest {
+public class StationTest extends MetroExampleTest {
 
 
 	@Test

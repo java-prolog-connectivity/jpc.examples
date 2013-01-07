@@ -8,7 +8,7 @@ import org.jpc.examples.metro.Line;
 import org.jpc.examples.metro.Station;
 import org.junit.Test;
 
-public class TestLine extends MetroExampleTest  {
+public class LineTest extends MetroExampleTest  {
 	
 
 	@Test

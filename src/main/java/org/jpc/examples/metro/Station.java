@@ -2,7 +2,9 @@ package org.jpc.examples.metro;
 
 import java.util.List;
 
-public interface Station {
+import org.jpc.term.TermConvertable;
+
+public interface Station extends TermConvertable {
 	
 	public abstract boolean connected(Station station);
 

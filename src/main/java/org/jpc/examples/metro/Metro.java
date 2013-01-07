@@ -2,7 +2,9 @@ package org.jpc.examples.metro;
 
 import java.util.List;
 
-public interface Metro {
+import org.jpc.term.TermConvertable;
+
+public interface Metro extends TermConvertable {
 
 	public abstract List<Line> lines();
 	

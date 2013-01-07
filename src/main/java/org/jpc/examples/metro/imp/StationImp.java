@@ -8,18 +8,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.jpc.converter.fromterm.TermToObjectConverter;
+import org.jpc.converter.fromterm.fromlistterm.ListTermToListConverter;
 import org.jpc.engine.logtalk.LogtalkObject;
-import org.jpc.engine.prolog.Query;
 import org.jpc.examples.metro.Line;
 import org.jpc.examples.metro.Station;
-import org.jpc.term.AbstractTerm;
+import org.jpc.query.Query;
 import org.jpc.term.Atom;
 import org.jpc.term.Compound;
 import org.jpc.term.Term;
-import org.jpc.term.TermConvertable;
 import org.jpc.term.Variable;
 
-public class StationImp implements Station, TermConvertable {
+public class StationImp implements Station {
 
 	public static final String STATION_FUNCTOR = "station";
 	
@@ -37,42 +37,30 @@ public class StationImp implements Station, TermConvertable {
 	@Override
 	public String toString() {return name;}
 	
-	public AbstractTerm asTerm() {
+	@Override
+	public Term asTerm() {
 		return new Compound(STATION_FUNCTOR, asList(new Atom(name)));
 	}
-	
-	public static Station create(Term term) {
-		Compound stationTerm = (Compound)term;
-		String lineName = ((Atom)stationTerm.arg(1)).getName();
-		return new StationImp(lineName);
-	}
-
 
 	public boolean connected(Station station) {
-		AbstractTerm message = new Compound("connected", asList((TermConvertable)station));
+		Term message = new Compound("connected", asList(station));
 		Query query = new LogtalkObject(getLogicEngine(), this).perform(message);
 		return query.hasSolution();
 	}
 
 
 	public long numberConnections() {
-		AbstractTerm message = new Compound("connected", asList(ANONYMOUS_VAR));
+		Term message = new Compound("connected", asList(ANONYMOUS_VAR));
 		Query query = new LogtalkObject(getLogicEngine(), this).perform(message);
 		return query.numberOfSolutions();
 	}
 
 
 	public Station connected(Line line) {
-		Station connectedStation = null;
 		String stationVarName = "Station";
-		Term message = new Compound("connected", asList(new Variable(stationVarName), (TermConvertable)line));
+		Term message = new Compound("connected", asList(new Variable(stationVarName), line));
 		Query query = new LogtalkObject(getLogicEngine(), this).perform(message);
-		Map<String, Term> solution = query.oneSolution();
-		if(solution != null) {
-			Term term = solution.get(stationVarName);
-			connectedStation = create(term);
-		}
-		return connectedStation;
+		return query.select(stationVarName).adapt(new TermToStationConverter()).oneSolution();
 	}
 
 
@@ -80,25 +68,19 @@ public class StationImp implements Station, TermConvertable {
 		String stationVarName = "Station";
 		Term message = new Compound("connected", asList(new Variable(stationVarName)));
 		Query query = new LogtalkObject(getLogicEngine(), this).perform(message);
-		List<Map<String, Term>> solutions = query.allSolutions();
-		List<Station> stations = new ArrayList<Station>();
-		for(Map<String, Term> solution : solutions) {
-			Term term = solution.get(stationVarName);
-			stations.add(create(term));
-		}
-		return stations;
+		return query.select(stationVarName).adapt(new TermToStationConverter()).allSolutions();
 	}
 
 
 	public boolean nearby(Station station) {
-		AbstractTerm message = new Compound("nearby", asList((TermConvertable)station));
+		Term message = new Compound("nearby", asList(station));
 		Query query = new LogtalkObject(getLogicEngine(), this).perform(message);
 		return query.hasSolution();
 	}
 
 
 	public long numberNearbyStations() {
-		AbstractTerm message = new Compound("nearby", asList(ANONYMOUS_VAR));
+		Term message = new Compound("nearby", asList(ANONYMOUS_VAR));
 		Query query = new LogtalkObject(getLogicEngine(), this).perform(message);
 		return query.numberOfSolutions();
 	}
@@ -108,18 +90,12 @@ public class StationImp implements Station, TermConvertable {
 		String stationVarName = "Station";
 		Term message = new Compound("nearby", asList(new Variable(stationVarName)));
 		Query query = new LogtalkObject(getLogicEngine(), this).perform(message);
-		List<Map<String, Term>> solutions = query.allSolutions();
-		List<Station> stations = new ArrayList<Station>();
-		for(Map<String, Term> solution : solutions) {
-			Term term = solution.get(stationVarName);
-			stations.add(create(term));
-		}
-		return stations;
+		return query.select(stationVarName).adapt(new TermToStationConverter()).allSolutions();
 	}
 
 
 	public boolean reachable(Station station) {
-		Term message = new Compound("reachable", asList((TermConvertable)station));
+		Term message = new Compound("reachable", asList(station));
 		Query query = new LogtalkObject(getLogicEngine(), this).perform(message);
 		return query.hasSolution();
 	}
@@ -133,21 +109,10 @@ public class StationImp implements Station, TermConvertable {
 
 
 	public List<Station> intermediateStations(Station station) {
-		List<Station> intermediateStations = null;
 		String stationsVarName = "Stations";
-		Term message = new Compound("reachable", asList((TermConvertable)station, new Variable(stationsVarName)));
+		Term message = new Compound("reachable", asList(station, new Variable(stationsVarName)));
 		Query query = new LogtalkObject(getLogicEngine(), this).perform(message);
-		Map<String, Term> solution = query.oneSolution();
-		if(solution != null) {
-			Term solutionTerm = solution.get(stationsVarName);
-			List<Term> terms = solutionTerm.asList();
-			List<Station> stations = new ArrayList<Station>();
-			for(Term term : terms) {
-				stations.add(create(term));
-			}
-			intermediateStations = stations;
-		}
-		return intermediateStations;
+		return (List<Station>) query.select(stationsVarName).adapt(new ListTermToListConverter(new TermToStationConverter())).oneSolution();
 	}
 
 
