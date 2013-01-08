@@ -9,16 +9,14 @@
 			'Tags' - 'The tags of the node']
 			]).
 
-	:- public([id/1, coordinates/1, distancekm/2, distancem/2, near/2]).
+	:- public([id/1, coordinates/1, distancekm/2, near/2]).
 		
 	id(Id) :- parameter(1, Id).
 		
 	coordinates(Coordinates) :- parameter(2, Coordinates).
 
 	distancekm(ThatCoordinates, Km) :- coordinates(ThisCoordinates), ThisCoordinates::distancekm(ThatCoordinates,Km).
-		
-	distancem(ThatCoordinates, M) :- coordinates(ThisCoordinates), ThisCoordinates::distancem(ThatCoordinates,M).
-		
+
 	near(ThatCoordinates, Km) :- coordinates(ThisCoordinates), ThisCoordinates::near(ThatCoordinates, Km).
 
 :- end_object.

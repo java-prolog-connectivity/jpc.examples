@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.jpc.term.TermConvertable;
 
-public interface Node extends TermConvertable {
+public interface Node extends Taggeable, TermConvertable {
 
 	public String getId();
 	
@@ -12,4 +12,8 @@ public interface Node extends TermConvertable {
 	
 	public Map<String, String> getTags();
 
+	public long distanceKm(Coordinates other);
+
+	public boolean near(Coordinates other, long deltaKm);
+	
 }

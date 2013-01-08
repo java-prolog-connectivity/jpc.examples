@@ -5,11 +5,16 @@
 		comment is 'A OSM logic theory'
 			]).
 
-	:- public([way/3, node/3, way/2, node/2, run_tests/0]).
+	:- public([node/3, node/2, node/1, way/3, way/2, way/1]).
 	:- dynamic([way/3, node/3]).
 
-	way(Id, way(Id, Nodes, Tags)) :- way(Id, Nodes, Tags).
+
+	node(Node) :- node(_, Node).
 	
 	node(Id, node(Id, Coordinates, Tags)) :- node(Id, Coordinates, Tags).
+	
+	way(Way) :- way(_, Way).
+	
+	way(Id, way(Id, Nodes, Tags)) :- way(Id, Nodes, Tags).
 	
 :- end_object.
