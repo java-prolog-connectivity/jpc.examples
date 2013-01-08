@@ -40,14 +40,14 @@ public class LineImp implements Line {
 
 	public boolean connects(Station s1, Station s2) {
 		Term message = new Compound("connects", asList(s1,s2));
-		Query query = new LogtalkObject(getLogicEngine(), this).perform(message);
+		Query query = new LogtalkObject(this, getLogicEngine()).perform(message);
 		return query.hasSolution();
 	}
 
 
 	public long segments() {
 		Term message = new Compound("connects", asList(ANONYMOUS_VAR, ANONYMOUS_VAR));
-		Query query = new LogtalkObject(getLogicEngine(), this).perform(message);
+		Query query = new LogtalkObject(this, getLogicEngine()).perform(message);
 		return query.numberOfSolutions();
 	}
 	

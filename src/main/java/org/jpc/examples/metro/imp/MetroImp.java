@@ -33,7 +33,7 @@ public class MetroImp implements Metro {
 	public List<Line> lines() {
 		String lineVarName = "Line";
 		Term message = new Compound(LINE_FUNCTOR, asList(new Variable(lineVarName)));
-		Query query = new LogtalkObject(getLogicEngine(), this).perform(message);
+		Query query = new LogtalkObject(this, getLogicEngine()).perform(message);
 		return query.select(new Compound(LINE_FUNCTOR, asList(new Variable(lineVarName)))).adapt(new TermToLineConverter()).allSolutions();
 	}
 
@@ -41,7 +41,7 @@ public class MetroImp implements Metro {
 	public Line line(String name) {
 		Line line = null;
 		Term message = new Compound(LINE_FUNCTOR, asList(new Atom(name)));
-		Query query = new LogtalkObject(getLogicEngine(), this).perform(message);
+		Query query = new LogtalkObject(this, getLogicEngine()).perform(message);
 		if(query.hasSolution())
 			line = new LineImp(name);
 		return line;

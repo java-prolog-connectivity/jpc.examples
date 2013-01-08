@@ -1,24 +1,28 @@
 package org.jpc.examples.metro.imp;
 
+import static org.jpc.examples.metro.imp.MetroDataLoader.DEFAULT_DATA_FILE;
+import static org.jpc.examples.metro.imp.MetroDataLoader.METRO_LINE_MARKER;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import java.io.IOException;
 
 import org.jpc.engine.prolog.PrologEngine;
-import org.jpc.util.salt.SaltPrologLoader;
-
-import static org.jpc.examples.metro.imp.MetroDataLoader.*;
+import org.jpc.salt.LogicEngineWriter;
+import org.jpc.salt.PrologWriter;
 
 /**
  * An alternative (shorter) implementation for a data loader using the SALT library
  * @author sergioc
  *
  */
-public class SaltMetroDataLoader extends SaltPrologLoader {
+public class SaltMetroDataLoader {
 
+	private PrologEngine logicEngine;
+	private PrologWriter writer;
+	
 	public SaltMetroDataLoader(PrologEngine logicEngine) {
-		super(logicEngine);
+		this.logicEngine = logicEngine;
 	}
 
 	public void load() {
@@ -27,6 +31,7 @@ public class SaltMetroDataLoader extends SaltPrologLoader {
 	}
 	
 	public void load(File resourceFile) {
+		writer = new LogicEngineWriter(logicEngine);
 		try(BufferedReader br = new BufferedReader(new FileReader(resourceFile));) {
 			String line = br.readLine();
 			writer.followingDirectives();

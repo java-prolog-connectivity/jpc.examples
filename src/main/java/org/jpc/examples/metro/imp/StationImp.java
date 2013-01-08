@@ -44,14 +44,14 @@ public class StationImp implements Station {
 
 	public boolean connected(Station station) {
 		Term message = new Compound("connected", asList(station));
-		Query query = new LogtalkObject(getLogicEngine(), this).perform(message);
+		Query query = new LogtalkObject(this, getLogicEngine()).perform(message);
 		return query.hasSolution();
 	}
 
 
 	public long numberConnections() {
 		Term message = new Compound("connected", asList(ANONYMOUS_VAR));
-		Query query = new LogtalkObject(getLogicEngine(), this).perform(message);
+		Query query = new LogtalkObject(this, getLogicEngine()).perform(message);
 		return query.numberOfSolutions();
 	}
 
@@ -59,7 +59,7 @@ public class StationImp implements Station {
 	public Station connected(Line line) {
 		String stationVarName = "Station";
 		Term message = new Compound("connected", asList(new Variable(stationVarName), line));
-		Query query = new LogtalkObject(getLogicEngine(), this).perform(message);
+		Query query = new LogtalkObject(this, getLogicEngine()).perform(message);
 		return query.select(stationVarName).adapt(new TermToStationConverter()).oneSolution();
 	}
 
@@ -67,21 +67,21 @@ public class StationImp implements Station {
 	public List<Station> connected() {
 		String stationVarName = "Station";
 		Term message = new Compound("connected", asList(new Variable(stationVarName)));
-		Query query = new LogtalkObject(getLogicEngine(), this).perform(message);
+		Query query = new LogtalkObject(this, getLogicEngine()).perform(message);
 		return query.select(stationVarName).adapt(new TermToStationConverter()).allSolutions();
 	}
 
 
 	public boolean nearby(Station station) {
 		Term message = new Compound("nearby", asList(station));
-		Query query = new LogtalkObject(getLogicEngine(), this).perform(message);
+		Query query = new LogtalkObject(this, getLogicEngine()).perform(message);
 		return query.hasSolution();
 	}
 
 
 	public long numberNearbyStations() {
 		Term message = new Compound("nearby", asList(ANONYMOUS_VAR));
-		Query query = new LogtalkObject(getLogicEngine(), this).perform(message);
+		Query query = new LogtalkObject(this, getLogicEngine()).perform(message);
 		return query.numberOfSolutions();
 	}
 
@@ -89,21 +89,21 @@ public class StationImp implements Station {
 	public List<Station> nearby() {
 		String stationVarName = "Station";
 		Term message = new Compound("nearby", asList(new Variable(stationVarName)));
-		Query query = new LogtalkObject(getLogicEngine(), this).perform(message);
+		Query query = new LogtalkObject(this, getLogicEngine()).perform(message);
 		return query.select(stationVarName).adapt(new TermToStationConverter()).allSolutions();
 	}
 
 
 	public boolean reachable(Station station) {
 		Term message = new Compound("reachable", asList(station));
-		Query query = new LogtalkObject(getLogicEngine(), this).perform(message);
+		Query query = new LogtalkObject(this, getLogicEngine()).perform(message);
 		return query.hasSolution();
 	}
 
 
 	public long numberReachableStations() {
 		Term message = new Compound("reachable", asList(ANONYMOUS_VAR));
-		Query query = new LogtalkObject(getLogicEngine(), this).perform(message);
+		Query query = new LogtalkObject(this, getLogicEngine()).perform(message);
 		return query.numberOfSolutions();
 	}
 
@@ -111,7 +111,7 @@ public class StationImp implements Station {
 	public List<Station> intermediateStations(Station station) {
 		String stationsVarName = "Stations";
 		Term message = new Compound("reachable", asList(station, new Variable(stationsVarName)));
-		Query query = new LogtalkObject(getLogicEngine(), this).perform(message);
+		Query query = new LogtalkObject(this, getLogicEngine()).perform(message);
 		return (List<Station>) query.select(stationsVarName).adapt(new ListTermToListConverter(new TermToStationConverter())).oneSolution();
 	}
 
