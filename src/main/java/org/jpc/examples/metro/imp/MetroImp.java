@@ -2,7 +2,7 @@ package org.jpc.examples.metro.imp;
 
 import static java.util.Arrays.asList;
 import static org.jpc.examples.metro.imp.LineImp.LINE_FUNCTOR;
-import static org.jpc.util.ThreadLocalLogicEngine.getLogicEngine;
+import static org.jpc.util.concurrent.ThreadLocalPrologEngine.getPrologEngine;
 
 import java.util.List;
 
@@ -33,7 +33,7 @@ public class MetroImp implements Metro {
 	public List<Line> lines() {
 		String lineVarName = "Line";
 		Term message = new Compound(LINE_FUNCTOR, asList(new Variable(lineVarName)));
-		Query query = new LogtalkObject(this, getLogicEngine()).perform(message);
+		Query query = new LogtalkObject(this, getPrologEngine()).perform(message);
 		return query.select(new Compound(LINE_FUNCTOR, asList(new Variable(lineVarName)))).adapt(new TermToLineConverter()).allSolutions();
 	}
 
@@ -41,7 +41,7 @@ public class MetroImp implements Metro {
 	public Line line(String name) {
 		Line line = null;
 		Term message = new Compound(LINE_FUNCTOR, asList(new Atom(name)));
-		Query query = new LogtalkObject(this, getLogicEngine()).perform(message);
+		Query query = new LogtalkObject(this, getPrologEngine()).perform(message);
 		if(query.hasSolution())
 			line = new LineImp(name);
 		return line;

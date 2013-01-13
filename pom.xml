@@ -89,7 +89,7 @@
 	<build>
 		<plugins>
 			<!-- The tests in this project should not be run when the project is built
-				 Instead, these tests should be run from each of the projects providing an implementation for a LogicEngine class
+				 Instead, these tests should be run from each of the projects providing an implementation for a PrologEngine class
 			-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

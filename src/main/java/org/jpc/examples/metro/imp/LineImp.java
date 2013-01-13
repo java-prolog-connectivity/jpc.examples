@@ -2,7 +2,7 @@ package org.jpc.examples.metro.imp;
 
 import static java.util.Arrays.asList;
 import static org.jpc.term.Variable.ANONYMOUS_VAR;
-import static org.jpc.util.ThreadLocalLogicEngine.getLogicEngine;
+import static org.jpc.util.concurrent.ThreadLocalPrologEngine.getPrologEngine;
 
 import java.util.Arrays;
 
@@ -40,14 +40,14 @@ public class LineImp implements Line {
 
 	public boolean connects(Station s1, Station s2) {
 		Term message = new Compound("connects", asList(s1,s2));
-		Query query = new LogtalkObject(this, getLogicEngine()).perform(message);
+		Query query = new LogtalkObject(this, getPrologEngine()).perform(message);
 		return query.hasSolution();
 	}
 
 
 	public long segments() {
 		Term message = new Compound("connects", asList(ANONYMOUS_VAR, ANONYMOUS_VAR));
-		Query query = new LogtalkObject(this, getLogicEngine()).perform(message);
+		Query query = new LogtalkObject(this, getPrologEngine()).perform(message);
 		return query.numberOfSolutions();
 	}
 	

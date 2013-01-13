@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.FileReader;
 
 import org.jpc.engine.prolog.PrologEngine;
-import org.jpc.salt.LogicEngineWriter;
+import org.jpc.salt.PrologEngineWriter;
 import org.jpc.salt.PrologWriter;
 
 /**
@@ -18,11 +18,11 @@ import org.jpc.salt.PrologWriter;
  */
 public class SaltMetroDataLoader {
 
-	private PrologEngine logicEngine;
+	private PrologEngine prologEngine;
 	private PrologWriter writer;
 	
-	public SaltMetroDataLoader(PrologEngine logicEngine) {
-		this.logicEngine = logicEngine;
+	public SaltMetroDataLoader(PrologEngine prologEngine) {
+		this.prologEngine = prologEngine;
 	}
 
 	public void load() {
@@ -31,7 +31,7 @@ public class SaltMetroDataLoader {
 	}
 	
 	public void load(File resourceFile) {
-		writer = new LogicEngineWriter(logicEngine);
+		writer = new PrologEngineWriter(prologEngine);
 		try(BufferedReader br = new BufferedReader(new FileReader(resourceFile));) {
 			String line = br.readLine();
 			writer.followingDirectives();

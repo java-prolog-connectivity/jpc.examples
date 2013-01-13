@@ -19,13 +19,13 @@ import org.jpc.term.Term;
  */
 public class MetroDataLoader {
 
-	private PrologEngine logicEngine;
+	private PrologEngine prologEngine;
 	public static final String METRO_LINE_MARKER = "!";
 	public static String DEFAULT_DATA_FILE = "org/jpc/examples/metro/data.txt";
 	
 	
-	public MetroDataLoader(PrologEngine logicEngine) {
-		this.logicEngine = logicEngine;
+	public MetroDataLoader(PrologEngine prologEngine) {
+		this.prologEngine = prologEngine;
 	}
 
 	public void load() {
@@ -64,7 +64,7 @@ public class MetroDataLoader {
 				asList(new Atom(stationName2)));
 		Term lineTerm = new Compound(LineImp.LINE_FUNCTOR, 
 				asList(new Atom(lineName)));
-		LogtalkObject logtalkObject = new LogtalkObject(lineTerm, logicEngine);
+		LogtalkObject logtalkObject = new LogtalkObject(lineTerm, prologEngine);
 		Term message = new Compound("add_connection", 
 				asList(station1Term, station2Term));
 		logtalkObject.perform(message).hasSolution();
