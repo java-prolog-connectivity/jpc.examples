@@ -1,10 +1,10 @@
-package org.jpc.examples.metro;
+package org.jpc.examples.metro.model;
 
 import java.util.List;
 
-import org.jpc.term.TermConvertable;
-
-public interface Station extends TermConvertable {
+public interface Station {
+	
+	public abstract String getName();
 	
 	public abstract boolean connected(Station station);
 

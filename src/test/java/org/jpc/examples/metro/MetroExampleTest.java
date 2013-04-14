@@ -1,10 +1,10 @@
 package org.jpc.examples.metro;
 
-import org.jpc.examples.metro.Line;
-import org.jpc.examples.metro.Metro;
-import org.jpc.examples.metro.MetroFactory;
-import org.jpc.examples.metro.Station;
-import org.jpc.examples.metro.imp.MetroFactoryImp;
+import org.jpc.examples.metro.model.Line;
+import org.jpc.examples.metro.model.Metro;
+import org.jpc.examples.metro.model.MetroFactory;
+import org.jpc.examples.metro.model.Station;
+import org.jpc.examples.metro.model.imp.MetroFactoryJpc;
 
 /**
  * The base class of the test classes for the metro example
@@ -17,7 +17,7 @@ public class MetroExampleTest {
 	
 	public MetroFactory getMetroFactory() {
 		if(defaultFactory == null)
-			defaultFactory = new MetroFactoryImp();
+			defaultFactory = new MetroFactoryJpc();
 		return defaultFactory;
 	}
 	

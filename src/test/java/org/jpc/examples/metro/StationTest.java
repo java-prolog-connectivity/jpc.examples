@@ -8,8 +8,8 @@ import static junit.framework.Assert.assertTrue;
 
 import java.util.List;
 
-import org.jpc.examples.metro.Line;
-import org.jpc.examples.metro.Station;
+import org.jpc.examples.metro.model.Line;
+import org.jpc.examples.metro.model.Station;
 import org.junit.Test;
 import org.minitoolbox.reflection.BeansUtil;
 

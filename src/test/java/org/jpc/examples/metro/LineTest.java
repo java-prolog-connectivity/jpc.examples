@@ -4,8 +4,8 @@ import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 
-import org.jpc.examples.metro.Line;
-import org.jpc.examples.metro.Station;
+import org.jpc.examples.metro.model.Line;
+import org.jpc.examples.metro.model.Station;
 import org.junit.Test;
 
 public class LineTest extends MetroExampleTest  {

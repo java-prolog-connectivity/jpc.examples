@@ -1,7 +1,9 @@
-package org.jpc.examples.metro.imp;
+package org.jpc.examples.metro;
 
-import static org.jpc.examples.metro.imp.MetroDataLoader.DEFAULT_DATA_FILE;
-import static org.jpc.examples.metro.imp.MetroDataLoader.METRO_LINE_MARKER;
+import static org.jpc.examples.metro.MetroDataLoader.DEFAULT_DATA_FILE;
+import static org.jpc.examples.metro.MetroDataLoader.METRO_LINE_MARKER;
+import static org.jpc.examples.metro.model.jpcconverters.LineConverter.LINE_FUNCTOR;
+import static org.jpc.examples.metro.model.jpcconverters.StationConverter.STATION_FUNCTOR;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -41,12 +43,12 @@ public class SaltMetroDataLoader {
 					if(line.startsWith(METRO_LINE_MARKER)) {
 						String lineName = line.substring(METRO_LINE_MARKER.length());
 						writer.startLogtalkObjectContext();
-						writer.startCompound().startAtom(LineImp.LINE_FUNCTOR).startAtom(lineName).endCompound();
+						writer.startCompound().startAtom(LINE_FUNCTOR).startAtom(lineName).endCompound();
 					} else {
 						String[] stationNames = line.split(",");
 						writer.startCompound().startAtom("add_connection");
 						for(String stationName : stationNames) {
-							writer.startCompound().startAtom(StationImp.STATION_FUNCTOR).startAtom(stationName).endCompound();
+							writer.startCompound().startAtom(STATION_FUNCTOR).startAtom(stationName).endCompound();
 						}
 						writer.endCompound();
 					}

@@ -1,6 +1,8 @@
-package org.jpc.examples.metro.imp;
+package org.jpc.examples.metro;
 
 import static java.util.Arrays.asList;
+import static org.jpc.examples.metro.model.jpcconverters.LineConverter.LINE_FUNCTOR;
+import static org.jpc.examples.metro.model.jpcconverters.StationConverter.STATION_FUNCTOR;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -58,11 +60,11 @@ public class MetroDataLoader {
 	}
 	
 	private void loadConnected(String stationName1, String stationName2, String lineName) {
-		Term station1Term = new Compound(StationImp.STATION_FUNCTOR, 
+		Term station1Term = new Compound(STATION_FUNCTOR, 
 				asList(new Atom(stationName1)));
-		Term station2Term = new Compound(StationImp.STATION_FUNCTOR, 
+		Term station2Term = new Compound(STATION_FUNCTOR, 
 				asList(new Atom(stationName2)));
-		Term lineTerm = new Compound(LineImp.LINE_FUNCTOR, 
+		Term lineTerm = new Compound(LINE_FUNCTOR, 
 				asList(new Atom(lineName)));
 		LogtalkObject logtalkObject = new LogtalkObject(lineTerm, prologEngine);
 		Term message = new Compound("add_connection", 

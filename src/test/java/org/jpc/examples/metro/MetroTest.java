@@ -6,8 +6,8 @@ import static junit.framework.Assert.assertNull;
 
 import java.util.List;
 
-import org.jpc.examples.metro.Line;
-import org.jpc.examples.metro.Metro;
+import org.jpc.examples.metro.model.Line;
+import org.jpc.examples.metro.model.Metro;
 import org.junit.Test;
 
 public class MetroTest extends MetroExampleTest {

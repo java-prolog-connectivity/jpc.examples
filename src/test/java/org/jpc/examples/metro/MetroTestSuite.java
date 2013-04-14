@@ -2,7 +2,6 @@ package org.jpc.examples.metro;
 
 import static junit.framework.Assert.assertTrue;
 
-import org.jpc.examples.metro.imp.MetroExample;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
