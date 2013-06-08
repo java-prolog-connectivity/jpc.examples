@@ -45,7 +45,7 @@ public class MetroJpc implements Metro {
 	@Override
 	public Line line(String name) {
 		Term message = new Compound(LineConverter.LINE_FUNCTOR, asList(new Atom(name)));
-		return asLogtalkObject().perform(message).<Line>selectObject().oneSolution();
+		return asLogtalkObject().perform(message).<Line>selectObject().oneSolutionOrThrow();
 	}
 
 }

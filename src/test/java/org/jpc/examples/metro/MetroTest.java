@@ -2,9 +2,10 @@ package org.jpc.examples.metro;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertNull;
+import static org.junit.Assert.fail;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.jpc.examples.metro.model.Line;
 import org.jpc.examples.metro.model.Metro;
@@ -36,8 +37,10 @@ public class MetroTest extends MetroExampleTest {
 		assertNotNull(line);
 		//System.out.println("Line: " + line);
 		
-		line = metro.line("line1");
-		assertNull(line);
+		try {
+			line = metro.line("line1");
+			fail();
+		} catch(NoSuchElementException e){}
 	}
 	
 }

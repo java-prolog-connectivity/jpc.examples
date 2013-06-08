@@ -47,13 +47,24 @@ public class StationJpc implements Station {
 	}
 
 
+	
+//	public Station connected(Line line) {
+//		String stationVarName = "Station";
+//		Term message = jpcContext.compound("connected", asList(new Variable(stationVarName), line));
+//		Query query = asLogtalkObject().perform(message);
+//		return query.<Station>selectObject(stationVarName).oneSolution();
+//	}
+
+	/**
+	 * Version of the connected(Line) method as it was shown in the WASDeTT paper.
+	 */
 	public Station connected(Line line) {
 		String stationVarName = "Station";
 		Term message = jpcContext.compound("connected", asList(new Variable(stationVarName), line));
-		Query query = asLogtalkObject().perform(message);
-		return query.<Station>selectObject(stationVarName).oneSolution();
+		Term objectMessage = jpcContext.compound("::", asList(this, message));
+		Query query = getPrologEngine().query(objectMessage, jpcContext);
+		return query.<Station>selectObject(stationVarName).oneSolutionOrThrow();
 	}
-
 
 	public List<Station> connected() {
 		String stationVarName = "Station";
@@ -100,7 +111,7 @@ public class StationJpc implements Station {
 		String stationsVarName = "Stations";
 		Term message = jpcContext.compound("reachable", asList(station, new Variable(stationsVarName)));
 		Query query = asLogtalkObject().perform(message);
-		return query.<List<Station>>selectObject(stationsVarName).oneSolution();
+		return query.<List<Station>>selectObject(stationsVarName).oneSolutionOrThrow();
 	}
 
 }

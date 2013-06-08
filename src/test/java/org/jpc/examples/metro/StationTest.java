@@ -3,10 +3,11 @@ package org.jpc.examples.metro;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.jpc.examples.metro.model.Line;
 import org.jpc.examples.metro.model.Station;
@@ -40,8 +41,10 @@ public class StationTest extends MetroExampleTest {
 		assertNotNull(connectedStation);
 		assertEquals(BeansUtil.getProperty(connectedStation, "name"), "oxford_circus");
 		//System.out.println("The station " + station + " is connected with " + connectedStation + " by means of the line " + line1);
-		connectedStation = station.connected(line2);  //no connected with any station by means of line2
-		assertNull(connectedStation);
+		try {
+			connectedStation = station.connected(line2);  //no connected with any station by means of line2
+			fail();
+		} catch(NoSuchElementException e) {}
 	}
 	
 	@Test
@@ -111,8 +114,10 @@ public class StationTest extends MetroExampleTest {
 //		for(IStation intermediateStation: intermediateStations) {
 //			System.out.println("- " + intermediateStation);
 //		}
-		
-		assertNull(station1.intermediateStations(station4));
+		try {
+			station1.intermediateStations(station4);
+			fail();
+		} catch(NoSuchElementException e){}
 	}
 	
 	@Test
