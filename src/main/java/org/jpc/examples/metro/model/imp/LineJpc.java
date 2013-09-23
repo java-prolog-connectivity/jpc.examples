@@ -3,7 +3,7 @@ package org.jpc.examples.metro.model.imp;
 import static java.util.Arrays.asList;
 import static org.jpc.engine.provider.PrologEngineProviderManager.getPrologEngine;
 import static org.jpc.examples.metro.model.imp.MetroJpc.jpcContext;
-import static org.jpc.term.Variable.ANONYMOUS_VAR;
+import static org.jpc.term.Var.ANONYMOUS_VAR;
 
 import org.jpc.engine.logtalk.LogtalkObject;
 import org.jpc.examples.metro.model.Line;

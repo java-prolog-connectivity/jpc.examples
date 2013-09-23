@@ -3,7 +3,7 @@ package org.jpc.examples.metro.model.imp;
 import static java.util.Arrays.asList;
 import static org.jpc.engine.provider.PrologEngineProviderManager.getPrologEngine;
 import static org.jpc.examples.metro.model.imp.MetroJpc.jpcContext;
-import static org.jpc.term.Variable.ANONYMOUS_VAR;
+import static org.jpc.term.Var.ANONYMOUS_VAR;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import org.jpc.examples.metro.model.Station;
 import org.jpc.query.Query;
 import org.jpc.term.Compound;
 import org.jpc.term.Term;
-import org.jpc.term.Variable;
+import org.jpc.term.Var;
 
 public class StationJpc implements Station {
 	
@@ -60,7 +60,7 @@ public class StationJpc implements Station {
 	 */
 	public Station connected(Line line) {
 		String stationVarName = "Station";
-		Term message = jpcContext.toTerm("connected", asList(new Variable(stationVarName), line));
+		Term message = jpcContext.toTerm("connected", asList(new Var(stationVarName), line));
 		Term objectMessage = jpcContext.toTerm("::", asList(this, message));
 		Query query = getPrologEngine().query(objectMessage, jpcContext);
 		return query.<Station>selectObject(stationVarName).oneSolutionOrThrow();
@@ -68,7 +68,7 @@ public class StationJpc implements Station {
 
 	public List<Station> connected() {
 		String stationVarName = "Station";
-		Term message = new Compound("connected", asList(new Variable(stationVarName)));
+		Term message = new Compound("connected", asList(new Var(stationVarName)));
 		Query query = asLogtalkObject().perform(message);
 		return query.<Station>selectObject(stationVarName).allSolutions();
 	}
@@ -89,7 +89,7 @@ public class StationJpc implements Station {
 
 	public List<Station> nearby() {
 		String stationVarName = "Station";
-		Term message = new Compound("nearby", asList(new Variable(stationVarName)));
+		Term message = new Compound("nearby", asList(new Var(stationVarName)));
 		Query query = asLogtalkObject().perform(message);
 		return query.<Station>selectObject(stationVarName).allSolutions();
 	}
@@ -109,7 +109,7 @@ public class StationJpc implements Station {
 
 	public List<Station> intermediateStations(Station station) {
 		String stationsVarName = "Stations";
-		Term message = jpcContext.toTerm("reachable", asList(station, new Variable(stationsVarName)));
+		Term message = jpcContext.toTerm("reachable", asList(station, new Var(stationsVarName)));
 		Query query = asLogtalkObject().perform(message);
 		return query.<List<Station>>selectObject(stationsVarName).oneSolutionOrThrow();
 	}
