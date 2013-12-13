@@ -12,7 +12,6 @@ import java.util.NoSuchElementException;
 import org.jpc.examples.metro.model.Line;
 import org.jpc.examples.metro.model.Station;
 import org.junit.Test;
-import org.minitoolbox.reflection.BeansUtil;
 
 public class StationTest extends MetroExampleTest {
 
@@ -39,7 +38,8 @@ public class StationTest extends MetroExampleTest {
 		Line line2 = line("northern");
 		Station connectedStation = station.connected(line1);
 		assertNotNull(connectedStation);
-		assertEquals(BeansUtil.getProperty(connectedStation, "name"), "oxford_circus");
+		
+		assertEquals(connectedStation.getName(), "oxford_circus");
 		//System.out.println("The station " + station + " is connected with " + connectedStation + " by means of the line " + line1);
 		try {
 			connectedStation = station.connected(line2);  //no connected with any station by means of line2
