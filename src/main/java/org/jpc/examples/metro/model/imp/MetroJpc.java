@@ -24,9 +24,9 @@ import org.jpc.term.Var;
 public class MetroJpc implements Metro {
 
 	public static final Jpc jpcContext = JpcBuilder.create()
-		.registerConverter(new MetroConverter())
-		.registerConverter(new LineConverter())
-		.registerConverter(new StationConverter()).build();
+		.register(new MetroConverter())
+		.register(new LineConverter())
+		.register(new StationConverter()).build();
 
 	
 	@Override
