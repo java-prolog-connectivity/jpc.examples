@@ -32,7 +32,7 @@ public class LineJpc implements Line {
 	}
 	
 	public boolean connects(Station s1, Station s2) {
-		Term message = jpcContext.toTerm("connects", asList(s1,s2));
+		Term message = jpcContext.toCompound("connects", asList(s1,s2));
 		Query query = asLogtalkObject().perform(message);
 		return query.hasSolution();
 	}

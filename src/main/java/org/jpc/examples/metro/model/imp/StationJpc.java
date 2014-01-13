@@ -36,7 +36,7 @@ public class StationJpc implements Station {
 	}
 	
 	public boolean connected(Station station) {
-		Term message = jpcContext.toTerm("connected", asList(station));
+		Term message = jpcContext.toCompound("connected", asList(station));
 		return asLogtalkObject().perform(message).hasSolution();
 	}
 
@@ -60,8 +60,8 @@ public class StationJpc implements Station {
 	 */
 	public Station connected(Line line) {
 		String stationVarName = "Station";
-		Term message = jpcContext.toTerm("connected", asList(new Var(stationVarName), line));
-		Term objectMessage = jpcContext.toTerm("::", asList(this, message));
+		Term message = jpcContext.toCompound("connected", asList(new Var(stationVarName), line));
+		Term objectMessage = jpcContext.toCompound("::", asList(this, message));
 		Query query = getPrologEngine().query(objectMessage, jpcContext);
 		return query.<Station>selectObject(stationVarName).oneSolutionOrThrow();
 	}
@@ -75,7 +75,7 @@ public class StationJpc implements Station {
 
 
 	public boolean nearby(Station station) {
-		Term message = jpcContext.toTerm("nearby", asList(station));
+		Term message = jpcContext.toCompound("nearby", asList(station));
 		return asLogtalkObject().perform(message).hasSolution();
 	}
 
@@ -96,7 +96,7 @@ public class StationJpc implements Station {
 
 
 	public boolean reachable(Station station) {
-		Term message = jpcContext.toTerm("reachable", asList(station));
+		Term message = jpcContext.toCompound("reachable", asList(station));
 		return asLogtalkObject().perform(message).hasSolution();
 	}
 
@@ -109,7 +109,7 @@ public class StationJpc implements Station {
 
 	public List<Station> intermediateStations(Station station) {
 		String stationsVarName = "Stations";
-		Term message = jpcContext.toTerm("reachable", asList(station, new Var(stationsVarName)));
+		Term message = jpcContext.toCompound("reachable", asList(station, new Var(stationsVarName)));
 		Query query = asLogtalkObject().perform(message);
 		return query.<List<Station>>selectObject(stationsVarName).oneSolutionOrThrow();
 	}
