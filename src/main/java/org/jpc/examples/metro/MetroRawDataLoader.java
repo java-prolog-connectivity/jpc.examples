@@ -1,8 +1,8 @@
 package org.jpc.examples.metro;
 
 import static java.util.Arrays.asList;
-import static org.jpc.examples.metro.model.jpcconverters.LineConverter.LINE_FUNCTOR;
-import static org.jpc.examples.metro.model.jpcconverters.StationConverter.STATION_FUNCTOR;
+import static org.jpc.examples.metro.model.hlapi.converters.LineConverter.LINE_FUNCTOR_NAME;
+import static org.jpc.examples.metro.model.hlapi.converters.StationConverter.STATION_FUNCTOR_NAME;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -19,14 +19,14 @@ import org.jpc.term.Term;
  * @author sergioc
  *
  */
-public class MetroDataLoader {
+public class MetroRawDataLoader {
 
-	private PrologEngine prologEngine;
 	public static final String METRO_LINE_MARKER = "!";
-	public static String DEFAULT_DATA_FILE = "org/jpc/examples/metro/data.txt";
+	public static final String DEFAULT_DATA_FILE = "org/jpc/examples/metro/raw_data.txt";
 	
+	private final PrologEngine prologEngine;
 	
-	public MetroDataLoader(PrologEngine prologEngine) {
+	public MetroRawDataLoader(PrologEngine prologEngine) {
 		this.prologEngine = prologEngine;
 	}
 
@@ -60,11 +60,11 @@ public class MetroDataLoader {
 	}
 	
 	private void loadConnected(String stationName1, String stationName2, String lineName) {
-		Term station1Term = new Compound(STATION_FUNCTOR, 
+		Term station1Term = new Compound(STATION_FUNCTOR_NAME, 
 				asList(new Atom(stationName1)));
-		Term station2Term = new Compound(STATION_FUNCTOR, 
+		Term station2Term = new Compound(STATION_FUNCTOR_NAME, 
 				asList(new Atom(stationName2)));
-		Term lineTerm = new Compound(LINE_FUNCTOR, 
+		Term lineTerm = new Compound(LINE_FUNCTOR_NAME, 
 				asList(new Atom(lineName)));
 		LogtalkObject logtalkObject = new LogtalkObject(lineTerm, prologEngine);
 		Term message = new Compound("add_connection", 

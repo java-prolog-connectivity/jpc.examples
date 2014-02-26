@@ -5,7 +5,7 @@ import static junit.framework.Assert.assertTrue;
 import org.jpc.examples.metro.model.Line;
 import org.jpc.examples.metro.model.Metro;
 import org.jpc.examples.metro.model.Station;
-import org.jpc.examples.metro.model.imp.MetroJpc;
+import org.jpc.examples.metro.model.hlapi.MetroHLApi;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

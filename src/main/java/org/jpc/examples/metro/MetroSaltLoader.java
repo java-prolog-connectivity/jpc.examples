@@ -1,9 +1,9 @@
 package org.jpc.examples.metro;
 
-import static org.jpc.examples.metro.MetroDataLoader.DEFAULT_DATA_FILE;
-import static org.jpc.examples.metro.MetroDataLoader.METRO_LINE_MARKER;
-import static org.jpc.examples.metro.model.jpcconverters.LineConverter.LINE_FUNCTOR;
-import static org.jpc.examples.metro.model.jpcconverters.StationConverter.STATION_FUNCTOR;
+import static org.jpc.examples.metro.MetroRawDataLoader.DEFAULT_DATA_FILE;
+import static org.jpc.examples.metro.MetroRawDataLoader.METRO_LINE_MARKER;
+import static org.jpc.examples.metro.model.hlapi.converters.LineConverter.LINE_FUNCTOR_NAME;
+import static org.jpc.examples.metro.model.hlapi.converters.StationConverter.STATION_FUNCTOR_NAME;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -18,12 +18,11 @@ import org.jpc.salt.PrologWriter;
  * @author sergioc
  *
  */
-public class SaltMetroDataLoader {
+public class MetroSaltLoader {
 
-	private PrologEngine prologEngine;
-	private PrologWriter writer;
+	private final PrologEngine prologEngine;
 	
-	public SaltMetroDataLoader(PrologEngine prologEngine) {
+	public MetroSaltLoader(PrologEngine prologEngine) {
 		this.prologEngine = prologEngine;
 	}
 
@@ -33,7 +32,7 @@ public class SaltMetroDataLoader {
 	}
 	
 	public void load(File resourceFile) {
-		writer = new PrologEngineWriter(prologEngine);
+		PrologWriter writer = new PrologEngineWriter(prologEngine);
 		try(BufferedReader br = new BufferedReader(new FileReader(resourceFile));) {
 			String line = br.readLine();
 			writer.followingDirectives();
@@ -43,12 +42,12 @@ public class SaltMetroDataLoader {
 					if(line.startsWith(METRO_LINE_MARKER)) {
 						String lineName = line.substring(METRO_LINE_MARKER.length());
 						writer.startLogtalkObjectContext();
-						writer.startCompound().startAtom(LINE_FUNCTOR).startAtom(lineName).endCompound();
+						writer.startCompound().startAtom(LINE_FUNCTOR_NAME).startAtom(lineName).endCompound();
 					} else {
 						String[] stationNames = line.split(",");
 						writer.startCompound().startAtom("add_connection");
 						for(String stationName : stationNames) {
-							writer.startCompound().startAtom(STATION_FUNCTOR).startAtom(stationName).endCompound();
+							writer.startCompound().startAtom(STATION_FUNCTOR_NAME).startAtom(stationName).endCompound();
 						}
 						writer.endCompound();
 					}

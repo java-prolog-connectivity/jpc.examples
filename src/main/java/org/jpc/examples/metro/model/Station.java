@@ -4,26 +4,26 @@ import java.util.List;
 
 public interface Station {
 	
-	public abstract String getName();
+	public String getName();
 	
-	public abstract boolean connected(Station station);
+	public boolean connected(Station station);
 
-	public abstract long numberConnections();
+	public long numberConnections();
 
-	public abstract Station connected(Line line);
+	public Station connected(Line line);
 
-	public abstract List<Station> connected();
+	public List<Station> connected();
 
-	public abstract boolean nearby(Station station);
+	public boolean nearby(Station station);
 
-	public abstract long numberNearbyStations();
+	public long numberNearbyStations();
 
-	public abstract List<Station> nearby();
+	public List<Station> nearby();
 
-	public abstract boolean reachable(Station station);
+	public boolean reachable(Station station);
 	
-	public abstract long numberReachableStations();
+	public long numberReachableStations();
 
-	public abstract List<Station> intermediateStations(Station station);
+	public List<Station> intermediateStations(Station station);
 
 }

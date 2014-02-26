@@ -1,13 +1,12 @@
 package org.jpc.examples.metro.model;
 
 
-
 public interface MetroFactory {
 	
-	public abstract Metro metro();
+	public Metro metro();
 
-	public abstract Station station(String name);
+	public Station station(String name);
 
-	public abstract Line line(String name);
+	public Line line(String name);
 	
 }
