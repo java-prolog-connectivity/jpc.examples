@@ -8,10 +8,25 @@ import org.jpc.term.Compound;
 
 public class HelloWorld {
 
+	/**
+	 * Plain text version.
+	 */
+	public static void textHelloWorld() {
+		getPrologEngine().query("write('hello world')").oneSolution();
+	}
+	
+	/**
+	 * Structured version.
+	 */
+	public static void structuredHelloWorld() {
+		getPrologEngine().query(new Compound("write", asList(new Atom("hello world")))).oneSolution();
+	}
+	
 	public static void main(String[] args) {
-		 getPrologEngine().query("write('hello world')");
-		 //structured version:
-		 getPrologEngine().query(new Compound("write", asList(new Atom("hello world"))));
+		textHelloWorld();
+		getPrologEngine().flushOutput();
+		structuredHelloWorld();
+		getPrologEngine().flushOutput();
 	}
 	
 }
