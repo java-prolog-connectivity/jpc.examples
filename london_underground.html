@@ -57,7 +57,7 @@
 
 <p>
 This section illustrates a case study that is referenced in the <a href="/user_manual.html" title="JPC user manual">JPC user manual</a>.
-In order to install this example refer to the <a href="installation_guide.html#installingJpcExamples" title="JPC installation guide">installation guide</a>.
+In order to download and install this example refer to the <a href="/installation_guide.html#installingJpcExamples" title="JPC installation guide">installation guide</a>.
 </p>
 
 
@@ -71,18 +71,35 @@ In order to install this example refer to the <a href="installation_guide.html#i
 <div id="content">
 
 
-<h2>The London underground</h2> 
+<h2>Overview</h2> 
 
-
+<p>
 This example addresses a typical problem that can be implemented easily with a logic language: a querying system about subway lines and stations. 
-
-http://java-prolog-connectivity.github.io/jpc.examples/logtalkdocs/underground_example/
-
-
-The first stage of the problem consists in expressing our knowledge about the London Underground as a set of logic statements. Most of the code in this section has been adapted from [7], with an interesting varia- tion: instead of implementing it in plain Prolog, we use Logtalk [8], a portable object-oriented layer on top of Prolog, facilitating in this way the mapping that needs to be made between objects belonging to each of the two worlds.
+This document describes both a concrete implementation in the Prolog side (using <a href="http://logtalk.org/" title="Logtalk">Logtalk</a>) and a set of Java interfaces that model the domain artifacts in the Java side.
+The main entities of our example are shown in figure 1.
+</p>
 
 
+<div class="divImg">
+  <img src="/img/london_underground.svg" alt="The London Underground." style="padding-bottom:0.5em;" height="400" />
+  <div id="imglabel:london_underground" >Fig 1. - The London Underground.</div>
+</div>
 
+<h2>An Implementation in Logtalk</h2> 
+
+<p>
+The first stage of the problem consists in expressing our knowledge about the London Underground as a set of logic statements. 
+Most of the code in this section has been adapted from the <a href="https://www.cs.bris.ac.uk/~flach/SimplyLogical.html" title="Symply Logical book">Symply Logical</a> book by <a href="https://www.cs.bris.ac.uk/~flach/index.html" title="Peter Flach">Peter Flach</a>.
+However, we introduce an interesting variation: instead of implementing it in plain Prolog as in the original, we use Logtalk, a portable object-oriented layer on top of Prolog.
+</p>
+
+<p>
+In the rest of this section we overview how these artifacts are modelled as distinct Logtalk entities.
+A detailed documentation of these entities is provided <a href="/jpc.examples/logtalkdocs/underground_example/" title="The Underground System Entities in Logtalk">here</a>.
+</p>
+
+
+<h3>The <code>line</code> Logtalk Object</h3> 
 
 <p><pre data-editor="prolog" data-show-gutter="true">
 :- object(line(_Name)).
@@ -117,7 +134,7 @@ The first stage of the problem consists in expressing our knowledge about the Lo
 
 
 
-
+<h3>The <code>station</code> Logtalk Object</h3> 
 
 
 <p><pre data-editor="prolog" data-show-gutter="true">
@@ -171,7 +188,7 @@ The first stage of the problem consists in expressing our knowledge about the Lo
 
 
 
-
+<h3>The <code>metro</code> Logtalk Object</h3> 
 
 
 
@@ -179,7 +196,7 @@ The first stage of the problem consists in expressing our knowledge about the Lo
 :- object(metro).
 
 	:- info([
-		comment is 'The London metro. Taken from the "Simply logic" book (Peter Flach).'
+		comment is 'The London metro. Adapted from the "Simply Logical" book by Peter Flach.'
 	]).
 	:- public([connected/3, nearby/2, reachable/3, line/1, remove_all/0]).
 	
@@ -219,7 +236,7 @@ The first stage of the problem consists in expressing our knowledge about the Lo
 
 
 
-
+<h3>The Loader File</h3> 
 
 <p><pre data-editor="prolog" data-show-gutter="true">
 :- initialization((
@@ -230,7 +247,7 @@ The first stage of the problem consists in expressing our knowledge about the Lo
 
 
 
-
+<h3>Configuring the Underground Structure</h3> 
 
 <p><pre data-editor="prolog" data-show-gutter="true">
 :- line(central)::add_connection(station(bond_street),station(oxford_circus)).
