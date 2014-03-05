@@ -2,7 +2,7 @@
 
 	:- info([
 		author is 'Sergio Castro',
-		comment is 'The London metro. Taken from the "Simply logic" book (Peter Flach).'
+		comment is 'The London metro. Adapted from the "Simply Logical" book by Peter Flach.'
 	]).
 	:- public([connected/3, nearby/2, reachable/3, line/1, remove_all/0]).
 	
