@@ -5,7 +5,7 @@
 <entity>
 <name><![CDATA[line(Name)]]></name>
 <type>object</type>
-<compilation>static, context_switching_calls</compilation>
+<compilation>static, context_switching_calls, dynamic_declarations</compilation>
 <comment><![CDATA[A metro line]]></comment>
 <parameters>
 <parameter>
@@ -20,14 +20,25 @@
 <predicates>
 <public>
 <predicate>
-<name><![CDATA[name/2]]></name>
+<name><![CDATA[name/1]]></name>
 <scope>public</scope>
 <compilation>static</compilation>
+<comment><![CDATA[Name is the line name.]]></comment>
+<template><![CDATA[name(Name)]]></template>
 </predicate>
 <predicate>
 <name><![CDATA[connects/2]]></name>
 <scope>public</scope>
 <compilation>static</compilation>
+<comment><![CDATA[Station1 is connected to Station2 by means of this line.]]></comment>
+<template><![CDATA[connects(Station1,Station2)]]></template>
+</predicate>
+<predicate>
+<name><![CDATA[add_connection/2]]></name>
+<scope>public</scope>
+<compilation>static</compilation>
+<comment><![CDATA[Station1 is now connected to Station2 by means of this line.]]></comment>
+<template><![CDATA[add_connection(Station1,Station2)]]></template>
 </predicate>
 </public>
 <protected>
