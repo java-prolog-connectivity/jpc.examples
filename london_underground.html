@@ -1,0 +1,265 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>The London Underground Case Study</title>
+
+	<link rel="stylesheet" href="styles/publication/sc.tutorial.css" />
+	<link rel="stylesheet" href="styles/publication/sc.tooglejs.css" />
+
+	<script type="text/javascript" src="js/jquery.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="js/ace-builds/src-noconflict/ace.js" charset="utf-8"></script>
+    <script type="text/javascript" src="js/publication/jquery.tableofcontents.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="js/publication/jquery.sc.publication.js" charset="utf-8"></script>
+    
+    <script type="text/javascript">//<![CDATA[
+  (function ($) {
+    $(document).ready(function(){
+		
+      $('#table_of_content_entries').tableOfContents('#content', {startLevel:2, depth: 3});
+      $.prettifyCodeSnippets("eclipse");
+      //$.prettifyCodeSnippets("solarized_light");
+      $.configureFootnotes();
+
+    })
+
+  })(jQuery);
+
+
+//]]></script>
+
+
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-47515052-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</head>
+
+
+
+
+
+<body>
+
+
+<h1>The London Underground Case Study</h1>
+
+<p>
+This section illustrates a case study that is referenced in the <a href="user_manual.html" title="JPC user manual">JPC user manual</a>.
+In order to install this example refer to the <a href="installation_guide.html#installingJpcExamples" title="JPC installation guide">installation guide</a>.
+</p>
+
+
+<div id="table_of_content">
+  <strong>Contents</strong>
+  <ol id="table_of_content_entries"></ol>
+</div>
+
+
+
+<div id="content">
+
+
+<h2>The London underground</h2> 
+
+
+This example addresses a typical problem that can be implemented easily with a logic language: a querying system about subway lines and stations. 
+
+http://java-prolog-connectivity.github.io/jpc.examples/logtalkdocs/underground_example/
+
+
+The first stage of the problem consists in expressing our knowledge about the London Underground as a set of logic statements. Most of the code in this section has been adapted from [7], with an interesting varia- tion: instead of implementing it in plain Prolog, we use Logtalk [8], a portable object-oriented layer on top of Prolog, facilitating in this way the mapping that needs to be made between objects belonging to each of the two worlds.
+
+
+
+
+<p><pre data-editor="prolog" data-show-gutter="true">
+:- object(line(_Name)).
+
+	:- info([
+		comment is 'A metro line',
+		parameters is [
+			'Name' - 'The name of the metro line']
+	]).
+	
+	:- public([name/1, connects/2, add_connection/2]).
+
+	:- info(name/1, [
+    	comment is 'Name is the line name.',
+    	argnames is ['Name']
+	]).
+	name(Name) :- parameter(1, Name).
+	
+	:- info(connects/2, [
+    	comment is 'Station1 is connected to Station2 by means of this line.',
+    	argnames is ['Station1', 'Station2']
+	]).
+	connects(Station1, Station2) :- self(Self), metro::connected(Station1, Station2, Self).
+	
+	:- info(add_connection/2, [
+    	comment is 'Station1 is now connected to Station2 by means of this line.',
+    	argnames is ['Station1', 'Station2']
+	]).
+	add_connection(Station1, Station2) :- self(Self), metro::assertz(connected(Station1, Station2, Self)).
+
+:- end_object.</pre></p>
+
+
+
+
+
+
+<p><pre data-editor="prolog" data-show-gutter="true">
+:- object(station(_Name)).
+
+	:- info([
+		comment is 'A metro station',
+		parameters is [
+			'Name' - 'The name of the station']
+	]).
+	
+	:- public([name/1, connected/1, connected/2, nearby/1, reachable/1, reachable/2]).
+
+	:- info(name/1, [
+    	comment is 'Name is the station name.',
+    	argnames is ['Name']
+	]).
+	name(Name) :- parameter(1, Name).
+	
+	:- info(connected/1, [
+    	comment is 'Station is a connected station.',
+    	argnames is ['Station']
+	]).
+	connected(Station) :- connected(Station, _).
+	
+	:- info(connected/2, [
+    	comment is 'Station is a connected station by means of Line.',
+    	argnames is ['Station', 'Line']
+	]).
+	connected(Station, L) :- self(Self), metro::connected(Self, Station, L).
+	
+	:- info(nearby/1, [
+    	comment is 'Station is a nearby station.',
+    	argnames is ['Station']
+	]).
+	nearby(Station) :- self(Self), metro::nearby(Self, Station).
+	
+	:- info(reachable/1, [
+    	comment is 'Station is a reachable station.',
+    	argnames is ['Station']
+	]).
+	reachable(Station) :- reachable(Station, _).
+	
+	:- info(reachable/2, [
+    	comment is 'Station is a reachable station by means of traversing IntermediateStations.',
+    	argnames is ['Station', 'IntermediateStations']
+	]).
+	reachable(Station, IntermediateStations) :- self(Self), metro::reachable(Self, Station, IntermediateStations).
+	
+:- end_object.</pre></p>
+
+
+
+
+
+
+
+<p><pre data-editor="prolog" data-show-gutter="true">
+:- object(metro).
+
+	:- info([
+		comment is 'The London metro. Taken from the "Simply logic" book (Peter Flach).'
+	]).
+	:- public([connected/3, nearby/2, reachable/3, line/1, remove_all/0]).
+	
+	:- info(connected/3, [
+    	comment is 'Station1 is connected to Station2 by means of Line.',
+    	argnames is ['Station1', 'Station2', 'Line']
+	]).
+    :- dynamic(connected/3).
+
+	:- info(nearby/2, [
+    	comment is 'Station1 is nearby Station2.',
+    	argnames is ['Station1', 'Station2']
+	]).
+	nearby(Station1,Station2):-connected(Station1,Station2,_).
+	nearby(Station1,Station2):-connected(Station1,IntermediateStation,Line),connected(IntermediateStation,Station2,Line).
+	
+	:- info(reachable/3, [
+    	comment is 'Station2 is reachable from Station1 by means of traversing IntermediateStations.',
+    	argnames is ['Station1', 'Station2', 'IntermediateStations']
+	]).
+	reachable(Station1,Station2,[]):-connected(Station1,Station2,_).
+	reachable(Station1,Station2,[Z|R]):-connected(Station1,Z,_),reachable(Z,Station2,R).
+
+	:- info(line/1, [
+    	comment is 'Name is the name of a Line.',
+    	argnames is ['Name']
+	]).
+	line(Name) :- setof(Line, Station1^Station2^connected(Station1,Station2,Line), AllLines), list::member(line(Name), AllLines).
+   
+   	:- info(remove_all/0, [
+    	comment is 'Removes all the lines.'
+	]).
+    remove_all :- metro::retractall(connected(_,_,_)).
+    
+:- end_object.</pre></p>
+
+
+
+
+
+
+<p><pre data-editor="prolog" data-show-gutter="true">
+:- initialization((
+	set_logtalk_flag(dynamic_declarations, allow),
+	logtalk_load(library(types_loader)),
+	logtalk_load([metro, station, line])
+)).</pre></p>
+
+
+
+
+
+<p><pre data-editor="prolog" data-show-gutter="true">
+:- line(central)::add_connection(station(bond_street),station(oxford_circus)).
+:- line(central)::add_connection(station(oxford_circus),station(tottenham_court_road)).
+:- line(jubilee)::add_connection(station(bond_street),station(green_park)).
+:- line(jubilee)::add_connection(station(green_park),station(charing_cross)).
+:- line(piccadilly)::add_connection(station(green_park),station(piccadilly_circus)).
+:- line(piccadilly)::add_connection(station(piccadilly_circus),station(leicester_square)).
+:- line(victoria)::add_connection(station(green_park),station(oxford_circus)).
+:- line(bakerloo)::add_connection(station(oxford_circus),station(piccadilly_circus)).
+:- line(bakerloo)::add_connection(station(piccadilly_circus),station(charing_cross)).
+:- line(northern)::add_connection(station(tottenham_court_road),station(leicester_square)).
+:- line(northern)::add_connection(station(leicester_square),station(charing_cross)).</pre></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div> <!-- end of content -->
+
+    
+
+</body>
+</html>
