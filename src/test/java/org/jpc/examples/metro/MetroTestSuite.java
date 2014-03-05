@@ -5,5 +5,5 @@ import org.junit.runners.Suite;
 
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({LowLevelApiTestSuite.class, HighLevelApiTestSuite.class})
+@Suite.SuiteClasses({/*LowLevelApiTestSuite.class, */HighLevelApiTestSuite.class})
 public class MetroTestSuite {}

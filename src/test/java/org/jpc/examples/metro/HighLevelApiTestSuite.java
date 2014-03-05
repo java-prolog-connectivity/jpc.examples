@@ -14,7 +14,7 @@ public class HighLevelApiTestSuite {
     public static void oneTimeSetUp() {
 		MetroExample.setFactory(new MetroFactoryHLApi());
 		assertTrue(MetroExample.loadAll()); //load logic files
-		MetroExample.removeData();
+		//MetroExample.removeData(); //retract_all currently not working in the SVN XSB version
 		MetroExample.importFromRawDataFile(); //import data to the logic database from text file
     }
 }
