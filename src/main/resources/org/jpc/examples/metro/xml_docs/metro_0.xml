@@ -6,7 +6,7 @@
 <name><![CDATA[metro]]></name>
 <type>object</type>
 <compilation>static, context_switching_calls, dynamic_declarations</compilation>
-<comment><![CDATA[The London metro. Taken from the "Simply logic" book (Peter Flach).]]></comment>
+<comment><![CDATA[The London metro. Adapted from the "Simply Logical" book by Peter Flach.]]></comment>
 <author><![CDATA[Sergio Castro]]></author>
 </entity>
 <relations>
