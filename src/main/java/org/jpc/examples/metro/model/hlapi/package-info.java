@@ -1,5 +1,5 @@
 /**
- *  * A concrete implementation of the underground example using the JPC high-level API.
+ * A concrete implementation of the underground example using the JPC high-level API.
  * @author sergioc
  *
  */
