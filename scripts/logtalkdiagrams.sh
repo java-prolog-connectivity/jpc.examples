@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#Generates pdf files from dot files
+#Generates pdf files from the diagram dot files
 
 SCRIPTSDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 DIR=$SCRIPTSDIR/../

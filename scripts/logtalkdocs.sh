@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#Generates html files from the xml doc files
+
 SCRIPTSDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 DIR=$SCRIPTSDIR/../
 
