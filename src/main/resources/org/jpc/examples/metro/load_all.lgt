@@ -11,6 +11,7 @@
 
 :- initialization((
 	set_logtalk_flag(report, off),
+	set_logtalk_flag(source_data, on),
 	logtalk_load(library(types_loader)),
 	logtalk_load([metro, station, line])
 )).

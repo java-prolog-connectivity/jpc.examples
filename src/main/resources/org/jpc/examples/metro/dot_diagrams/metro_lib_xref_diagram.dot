@@ -1,0 +1,89 @@
+digraph metro_lib {
+rankdir="BT"
+ranksep="1.25"
+compound="true"
+splines="true"
+pack="true"
+clusterrank="local"
+labeljust="l"
+margin="1.0"
+fontname="Courier"
+fontsize="10"
+fontcolor="snow4"
+pencolor="snow4"
+node [shape="ellipse",style="filled",fillcolor="white",fontname="Courier",fontsize="9"]
+edge [fontname="Courier",fontsize="9"]
+label="Reference Diagram for the London Underground Example\lGenerated on 2014/03/07, 23:29\l"
+
+subgraph "cluster_library_metro_lib" {
+tooltip="/Users/sergioc/Documents/workspaces/heal/jpc_examples/src/main/resources/org/jpc/examples/metro/"
+bgcolor="snow2"
+style="rounded"
+margin="10"
+label="metro_lib"
+subgraph "cluster_file_/Users/sergioc/Documents/workspaces/heal/jpc_examples/src/main/resources/org/jpc/examples/metro/generate_docs.lgt" {
+tooltip="/Users/sergioc/Documents/workspaces/heal/jpc_examples/src/main/resources/org/jpc/examples/metro/generate_docs.lgt"
+bgcolor="snow"
+style="rounded"
+margin="10"
+label="generate_docs.lgt"
+}
+
+subgraph "cluster_file_/Users/sergioc/Documents/workspaces/heal/jpc_examples/src/main/resources/org/jpc/examples/metro/metro.lgt" {
+tooltip="/Users/sergioc/Documents/workspaces/heal/jpc_examples/src/main/resources/org/jpc/examples/metro/metro.lgt"
+bgcolor="snow"
+style="rounded"
+margin="10"
+label="metro.lgt"
+"metro" [shape="box",tooltip="prototype",style="filled",fillcolor="beige",label=<<B>metro</B><BR/> <BR/><![CDATA[connected/3]]><BR/><![CDATA[nearby/2]]><BR/><![CDATA[reachable/3]]><BR/><![CDATA[line/1]]><BR/><![CDATA[remove_all/0]]><BR/>>]
+}
+
+subgraph "cluster_file_/Users/sergioc/Documents/workspaces/heal/jpc_examples/src/main/resources/org/jpc/examples/metro/station.lgt" {
+tooltip="/Users/sergioc/Documents/workspaces/heal/jpc_examples/src/main/resources/org/jpc/examples/metro/station.lgt"
+bgcolor="snow"
+style="rounded"
+margin="10"
+label="station.lgt"
+"station(Name)" [shape="box",tooltip="prototype",style="filled",fillcolor="beige",label=<<B>station(Name)</B><BR/> <BR/><![CDATA[name/1]]><BR/><![CDATA[connected/1]]><BR/><![CDATA[connected/2]]><BR/><![CDATA[nearby/1]]><BR/><![CDATA[reachable/1]]><BR/><![CDATA[reachable/2]]><BR/>>]
+}
+
+subgraph "cluster_file_/Users/sergioc/Documents/workspaces/heal/jpc_examples/src/main/resources/org/jpc/examples/metro/line.lgt" {
+tooltip="/Users/sergioc/Documents/workspaces/heal/jpc_examples/src/main/resources/org/jpc/examples/metro/line.lgt"
+bgcolor="snow"
+style="rounded"
+margin="10"
+label="line.lgt"
+"line(Name)" [shape="box",tooltip="prototype",style="filled",fillcolor="beige",label=<<B>line(Name)</B><BR/> <BR/><![CDATA[name/1]]><BR/><![CDATA[connects/2]]><BR/><![CDATA[add_connection/2]]><BR/>>]
+}
+
+subgraph "cluster_file_/Users/sergioc/Documents/workspaces/heal/jpc_examples/src/main/resources/org/jpc/examples/metro/generate_diagrams.lgt" {
+tooltip="/Users/sergioc/Documents/workspaces/heal/jpc_examples/src/main/resources/org/jpc/examples/metro/generate_diagrams.lgt"
+bgcolor="snow"
+style="rounded"
+margin="10"
+label="generate_diagrams.lgt"
+}
+
+subgraph "cluster_file_/Users/sergioc/Documents/workspaces/heal/jpc_examples/src/main/resources/org/jpc/examples/metro/load_all.lgt" {
+tooltip="/Users/sergioc/Documents/workspaces/heal/jpc_examples/src/main/resources/org/jpc/examples/metro/load_all.lgt"
+bgcolor="snow"
+style="rounded"
+margin="10"
+label="load_all.lgt"
+}
+
+subgraph "cluster_other" {
+tooltip="(external entities)"
+bgcolor="white"
+style="rounded"
+margin="10"
+label="(external entities)"
+"list" [shape="box",tooltip="prototype",style="filled,dashed",fillcolor="beige",label=<<B>list</B>>]
+}
+
+"metro" -> "list" [arrowhead="rdiamond",tooltip="calls",label=<<![CDATA[member/2]]><BR/>>]
+"station(Name)" -> "metro" [arrowhead="rdiamond",tooltip="calls",label=<<![CDATA[connected/3]]><BR/><![CDATA[nearby/2]]><BR/><![CDATA[reachable/3]]><BR/>>]
+"line(Name)" -> "metro" [arrowhead="rdiamond",tooltip="calls",label=<<![CDATA[connected/3]]><BR/>>]
+}
+
+}

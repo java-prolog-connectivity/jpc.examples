@@ -1,11 +1,15 @@
 #!/bin/bash
 
-sh default_logtalk
+SCRIPTSDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+DIR=$SCRIPTSDIR/..
 
 #cleaning up
-rm -R ../docs/logtalkdocs
-mkdir ../docs/logtalkdocs
-mkdir ../docs/logtalkdocs/underground_example
+rm -R $DIR/docs/logtalkdocs
+mkdir $DIR/docs/logtalkdocs
+mkdir $DIR/docs/logtalkdocs/underground_example
+
+#generating intermediate files
+sh logtalk
 
 #generating diagrams
 sh logtalkdiagrams.sh
