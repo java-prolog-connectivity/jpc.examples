@@ -17,13 +17,6 @@
 </a>
 </g>
 </g>
-<g id="clust3" class="cluster"><title>cluster_file_/Users/sergioc/Documents/workspaces/heal/jpc_examples/src/main/resources/org/jpc/examples/metro/metro.lgt</title>
-<g id="a_clust3"><a xlink:title="/Users/sergioc/Documents/workspaces/heal/jpc_examples/src/main/resources/org/jpc/examples/metro/metro.lgt">
-<path fill="snow" stroke="#8b8989" d="M117.5,-256C117.5,-256 193.5,-256 193.5,-256 199.5,-256 205.5,-262 205.5,-268 205.5,-268 205.5,-355 205.5,-355 205.5,-361 199.5,-367 193.5,-367 193.5,-367 117.5,-367 117.5,-367 111.5,-367 105.5,-361 105.5,-355 105.5,-355 105.5,-268 105.5,-268 105.5,-262 111.5,-256 117.5,-256"/>
-<text text-anchor="middle" x="141" y="-263" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">metro.lgt</text>
-</a>
-</g>
-</g>
 <g id="clust4" class="cluster"><title>cluster_file_/Users/sergioc/Documents/workspaces/heal/jpc_examples/src/main/resources/org/jpc/examples/metro/station.lgt</title>
 <g id="a_clust4"><a xlink:title="/Users/sergioc/Documents/workspaces/heal/jpc_examples/src/main/resources/org/jpc/examples/metro/station.lgt">
 <path fill="snow" stroke="#8b8989" d="M189.5,-56C189.5,-56 271.5,-56 271.5,-56 277.5,-56 283.5,-62 283.5,-68 283.5,-68 283.5,-163 283.5,-163 283.5,-169 277.5,-175 271.5,-175 271.5,-175 189.5,-175 189.5,-175 183.5,-175 177.5,-169 177.5,-163 177.5,-163 177.5,-68 177.5,-68 177.5,-62 183.5,-56 189.5,-56"/>
@@ -42,6 +35,13 @@
 <g id="a_clust8"><a xlink:title="(external entities)">
 <path fill="white" stroke="#8b8989" d="M102.5,-428C102.5,-428 209.5,-428 209.5,-428 215.5,-428 221.5,-434 221.5,-440 221.5,-440 221.5,-491 221.5,-491 221.5,-497 215.5,-503 209.5,-503 209.5,-503 102.5,-503 102.5,-503 96.5,-503 90.5,-497 90.5,-491 90.5,-491 90.5,-440 90.5,-440 90.5,-434 96.5,-428 102.5,-428"/>
 <text text-anchor="middle" x="156" y="-435" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">(external entities)</text>
+</a>
+</g>
+</g>
+<g id="clust3" class="cluster"><title>cluster_file_/Users/sergioc/Documents/workspaces/heal/jpc_examples/src/main/resources/org/jpc/examples/metro/metro.lgt</title>
+<g id="a_clust3"><a xlink:title="/Users/sergioc/Documents/workspaces/heal/jpc_examples/src/main/resources/org/jpc/examples/metro/metro.lgt">
+<path fill="snow" stroke="#8b8989" d="M117.5,-256C117.5,-256 193.5,-256 193.5,-256 199.5,-256 205.5,-262 205.5,-268 205.5,-268 205.5,-355 205.5,-355 205.5,-361 199.5,-367 193.5,-367 193.5,-367 117.5,-367 117.5,-367 111.5,-367 105.5,-361 105.5,-355 105.5,-355 105.5,-268 105.5,-268 105.5,-262 111.5,-256 117.5,-256"/>
+<text text-anchor="middle" x="141" y="-263" font-family="Courier,monospace" font-size="10.00" fill="#8b8989">metro.lgt</text>
 </a>
 </g>
 </g>
