@@ -1,4 +1,4 @@
-package org.jpc.examples.metro;
+package org.jpc.examples.metro.model;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

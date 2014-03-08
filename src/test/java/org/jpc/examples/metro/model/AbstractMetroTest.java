@@ -1,5 +1,6 @@
-package org.jpc.examples.metro;
+package org.jpc.examples.metro.model;
 
+import org.jpc.examples.metro.MetroExample;
 import org.jpc.examples.metro.model.Line;
 import org.jpc.examples.metro.model.Metro;
 import org.jpc.examples.metro.model.Station;
@@ -9,7 +10,7 @@ import org.jpc.examples.metro.model.Station;
  * @author sergioc
  *
  */
-public abstract class MetroExampleTest {
+public abstract class AbstractMetroTest {
 
 	public Metro metro() {
 		return MetroExample.getFactory().metro();

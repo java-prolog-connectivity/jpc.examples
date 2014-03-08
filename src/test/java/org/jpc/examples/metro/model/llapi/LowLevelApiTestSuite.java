@@ -1,7 +1,9 @@
-package org.jpc.examples.metro;
+package org.jpc.examples.metro.model.llapi;
 
 import static junit.framework.Assert.assertTrue;
 
+import org.jpc.examples.metro.MetroExample;
+import org.jpc.examples.metro.model.AllMetroTests;
 import org.jpc.examples.metro.model.llapi.MetroFactoryLLApi;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
@@ -14,7 +16,7 @@ public class LowLevelApiTestSuite {
     public static void oneTimeSetUp() {
 		MetroExample.setFactory(new MetroFactoryLLApi());
 		assertTrue(MetroExample.loadAll()); //load logic files
-		//MetroExample.removeData(); //retract_all currently not working in the SVN XSB version
+		MetroExample.removeData();
 		MetroExample.importFromPrologFile(); //import data to the logic database from text file
     }
 }

@@ -1,4 +1,4 @@
-package org.jpc.examples.metro;
+package org.jpc.examples.metro.model;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
@@ -13,7 +13,7 @@ import org.jpc.examples.metro.model.Line;
 import org.jpc.examples.metro.model.Station;
 import org.junit.Test;
 
-public class StationTest extends MetroExampleTest {
+public class StationTest extends AbstractMetroTest {
 
 
 	@Test

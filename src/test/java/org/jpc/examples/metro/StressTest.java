@@ -2,6 +2,7 @@ package org.jpc.examples.metro;
 
 import static junit.framework.Assert.assertTrue;
 
+import org.jpc.examples.metro.model.AbstractMetroTest;
 import org.jpc.examples.metro.model.Line;
 import org.jpc.examples.metro.model.Metro;
 import org.jpc.examples.metro.model.Station;
@@ -9,7 +10,7 @@ import org.jpc.examples.metro.model.hlapi.MetroHLApi;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class StressTest extends MetroExampleTest {
+public class StressTest extends AbstractMetroTest {
 //
 //	@BeforeClass
 //    public static void oneTimeSetUp() {
