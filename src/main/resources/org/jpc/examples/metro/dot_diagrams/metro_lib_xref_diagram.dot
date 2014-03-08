@@ -13,7 +13,7 @@ fontcolor="snow4"
 pencolor="snow4"
 node [shape="ellipse",style="filled",fillcolor="white",fontname="Courier",fontsize="9"]
 edge [fontname="Courier",fontsize="9"]
-label="Reference Diagram for the London Underground Example\lGenerated on 2014/03/07, 23:29\l"
+label="Reference Diagram for the London Underground Example\l"
 
 subgraph "cluster_library_metro_lib" {
 tooltip="/Users/sergioc/Documents/workspaces/heal/jpc_examples/src/main/resources/org/jpc/examples/metro/"
