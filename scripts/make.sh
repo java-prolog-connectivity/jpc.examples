@@ -11,8 +11,8 @@ mkdir $DIR/docs/logtalkdocs/underground_example
 #generating intermediate files
 sh logtalk
 
-#generating diagrams
-sh logtalkdiagrams.sh
-
 #generating logtalkdocs
 sh logtalkdocs.sh
+
+#generating diagrams
+sh logtalkdiagrams.sh
