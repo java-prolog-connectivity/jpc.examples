@@ -9,6 +9,7 @@ mkdir $DIR/docs/logtalkdocs
 mkdir $DIR/docs/logtalkdocs/underground_example
 
 #generating intermediate files
+#the following assumes that the symbolic link "logtalk" has been set (e.g., by means of the "logtalk_backend_select" script) pointing to the preferred logtalk executable.
 sh logtalk
 
 #generating logtalkdocs
