@@ -1,6 +1,6 @@
 package org.jpc.examples.metro;
 
-import static junit.framework.Assert.assertTrue;
+import static org.junit.Assert.assertTrue;
 
 import org.jpc.examples.metro.model.AbstractMetroTest;
 import org.jpc.examples.metro.model.Line;

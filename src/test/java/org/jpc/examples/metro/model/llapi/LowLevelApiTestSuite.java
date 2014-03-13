@@ -1,6 +1,6 @@
 package org.jpc.examples.metro.model.llapi;
 
-import static junit.framework.Assert.assertTrue;
+import static org.junit.Assert.assertTrue;
 
 import org.jpc.examples.metro.MetroExample;
 import org.jpc.examples.metro.model.AllMetroTests;
