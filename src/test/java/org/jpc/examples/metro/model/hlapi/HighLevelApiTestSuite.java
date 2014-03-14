@@ -1,7 +1,5 @@
 package org.jpc.examples.metro.model.hlapi;
 
-import static org.junit.Assert.assertTrue;
-
 import org.jpc.examples.metro.MetroExample;
 import org.jpc.examples.metro.model.AllMetroTests;
 import org.junit.BeforeClass;
@@ -14,7 +12,9 @@ public class HighLevelApiTestSuite {
 	@BeforeClass
     public static void oneTimeSetUp() {
 		MetroExample.setFactory(new MetroFactoryHLApi());
-		assertTrue(MetroExample.loadAll()); //load logic files
+		if(!MetroExample.loadAll()) { //load logic files
+			throw new RuntimeException();
+		}
 		MetroExample.removeData();
 		MetroExample.importFromRawDataFile(); //import data to the logic database from text file
     }
