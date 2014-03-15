@@ -1,11 +1,12 @@
 package org.jpc.examples.metro.model.hlapi;
 
 import static java.util.Arrays.asList;
-import static org.jpc.engine.provider.PrologEngineProviderManager.getPrologEngine;
+import static org.jpc.engine.prolog.PrologEngines.getPrologEngine;
 import static org.jpc.examples.metro.model.hlapi.MetroHLApi.jpcContext;
 import static org.jpc.term.Var.ANONYMOUS_VAR;
 
 import org.jpc.engine.logtalk.LogtalkObject;
+import org.jpc.engine.prolog.PrologEngine;
 import org.jpc.examples.metro.model.Line;
 import org.jpc.examples.metro.model.Station;
 import org.jpc.query.Query;
@@ -14,10 +15,12 @@ import org.jpc.term.Term;
 
 public class LineHLApi implements Line {
 
-	private String name;
+	private final String name;
+	private final PrologEngine prologEngine;
 	
 	public LineHLApi(String name) {
 		this.name = name;
+		prologEngine = getPrologEngine(getClass());
 	}
 
 	@Override
@@ -30,7 +33,7 @@ public class LineHLApi implements Line {
 
 	
 	private LogtalkObject<Compound> asLogtalkObject() {
-		return new LogtalkObject<>(this, getPrologEngine(), jpcContext);
+		return new LogtalkObject<>(this, prologEngine, jpcContext);
 	}
 	
 	@Override

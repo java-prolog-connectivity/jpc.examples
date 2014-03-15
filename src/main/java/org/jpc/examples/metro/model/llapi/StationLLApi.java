@@ -1,7 +1,7 @@
 package org.jpc.examples.metro.model.llapi;
 
 import static java.util.Arrays.asList;
-import static org.jpc.engine.provider.PrologEngineProviderManager.getPrologEngine;
+import static org.jpc.engine.prolog.PrologEngines.getPrologEngine;
 import static org.jpc.examples.metro.model.hlapi.MetroHLApi.jpcContext;
 import static org.jpc.term.Var.ANONYMOUS_VAR;
 
@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jpc.engine.logtalk.LogtalkConstants;
+import org.jpc.engine.prolog.PrologEngine;
 import org.jpc.examples.metro.model.Line;
 import org.jpc.examples.metro.model.Station;
 import org.jpc.query.Query;
@@ -26,10 +27,13 @@ public class StationLLApi implements Station {
 		return new StationLLApi(((Atom)stationTerm.arg(1)).getName());
 	}
 	
-	private String name;
+	
+	private final String name;
+	private final PrologEngine prologEngine;
 	
 	public StationLLApi(String name) {
 		this.name = name;
+		prologEngine = getPrologEngine(getClass());
 	}
 
 	@Override
@@ -49,7 +53,7 @@ public class StationLLApi implements Station {
 	public boolean connected(Station station) {
 		Term message = new Compound("connected", asList(((StationLLApi)station).asTerm()));
 		Term goal = new Compound(LogtalkConstants.LOGTALK_OPERATOR, asList(asTerm(), message));
-		Query query = getPrologEngine().query(goal);
+		Query query = prologEngine.query(goal);
 		return query.hasSolution();
 	}
 
@@ -57,7 +61,7 @@ public class StationLLApi implements Station {
 	public long numberConnections() {
 		Term message = new Compound("connected", asList(ANONYMOUS_VAR));
 		Term goal = new Compound(LogtalkConstants.LOGTALK_OPERATOR, asList(asTerm(), message));
-		Query query = getPrologEngine().query(goal);
+		Query query = prologEngine.query(goal);
 		return query.numberOfSolutions();
 	}
 
@@ -66,7 +70,7 @@ public class StationLLApi implements Station {
 		String stationVarName = "Station";
 		Term message = jpcContext.toCompound("connected", asList(new Var(stationVarName), line));
 		Term goal = new Compound(LogtalkConstants.LOGTALK_OPERATOR, asList(asTerm(), message));
-		Query query = getPrologEngine().query(goal);
+		Query query = prologEngine.query(goal);
 		Term stationTerm = query.oneSolutionOrThrow().get(stationVarName);
 		return create(stationTerm);
 	}
@@ -76,7 +80,7 @@ public class StationLLApi implements Station {
 		String stationVarName = "Station";
 		Term message = new Compound("connected", asList(new Var(stationVarName)));
 		Term goal = new Compound(LogtalkConstants.LOGTALK_OPERATOR, asList(asTerm(), message));
-		Query query = getPrologEngine().query(goal);
+		Query query = prologEngine.query(goal);
 		List<Station> stations = new ArrayList<>();
 		while(query.hasNext()) {
 			Term stationTerm = query.next().get(stationVarName);
@@ -89,7 +93,7 @@ public class StationLLApi implements Station {
 	public boolean nearby(Station station) {
 		Term message = new Compound("nearby", asList(((StationLLApi)station).asTerm()));
 		Term goal = new Compound(LogtalkConstants.LOGTALK_OPERATOR, asList(asTerm(), message));
-		Query query = getPrologEngine().query(goal);
+		Query query = prologEngine.query(goal);
 		return query.hasSolution();
 	}
 
@@ -97,7 +101,7 @@ public class StationLLApi implements Station {
 	public long numberNearbyStations() {
 		Term message = new Compound("nearby", asList(ANONYMOUS_VAR));
 		Term goal = new Compound(LogtalkConstants.LOGTALK_OPERATOR, asList(asTerm(), message));
-		Query query = getPrologEngine().query(goal);
+		Query query = prologEngine.query(goal);
 		return query.numberOfSolutions();
 	}
 
@@ -106,7 +110,7 @@ public class StationLLApi implements Station {
 		String stationVarName = "Station";
 		Term message = new Compound("nearby", asList(new Var(stationVarName)));
 		Term goal = new Compound(LogtalkConstants.LOGTALK_OPERATOR, asList(asTerm(), message));
-		Query query = getPrologEngine().query(goal);
+		Query query = prologEngine.query(goal);
 		List<Station> stations = new ArrayList<>();
 		while(query.hasNext()) {
 			Term stationTerm = query.next().get(stationVarName);
@@ -119,7 +123,7 @@ public class StationLLApi implements Station {
 	public boolean reachable(Station station) {
 		Term message = jpcContext.toCompound("reachable", asList(station));
 		Term goal = new Compound(LogtalkConstants.LOGTALK_OPERATOR, asList(asTerm(), message));
-		Query query = getPrologEngine().query(goal);
+		Query query = prologEngine.query(goal);
 		return query.hasSolution();
 	}
 
@@ -127,7 +131,7 @@ public class StationLLApi implements Station {
 	public long numberReachableStations() {
 		Term message = new Compound("reachable", asList(ANONYMOUS_VAR));
 		Term goal = new Compound(LogtalkConstants.LOGTALK_OPERATOR, asList(asTerm(), message));
-		Query query = getPrologEngine().query(goal);
+		Query query = prologEngine.query(goal);
 		return query.numberOfSolutions();
 	}
 
@@ -136,7 +140,7 @@ public class StationLLApi implements Station {
 		String stationsVarName = "Stations";
 		Term message = jpcContext.toCompound("reachable", asList(station, new Var(stationsVarName)));
 		Term goal = new Compound(LogtalkConstants.LOGTALK_OPERATOR, asList(asTerm(), message));
-		Query query = getPrologEngine().query(goal);
+		Query query = prologEngine.query(goal);
 		Term stationsList = query.oneSolutionOrThrow().get(stationsVarName);
 		ListTerm listTerm = stationsList.asList();
 		List<Station> stations = new ArrayList<>();

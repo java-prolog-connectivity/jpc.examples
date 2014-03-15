@@ -1,13 +1,14 @@
 package org.jpc.examples.metro.model.hlapi;
 
 import static java.util.Arrays.asList;
-import static org.jpc.engine.provider.PrologEngineProviderManager.getPrologEngine;
+import static org.jpc.engine.prolog.PrologEngines.getPrologEngine;
 
 import java.util.List;
 
 import org.jpc.Jpc;
 import org.jpc.JpcBuilder;
 import org.jpc.engine.logtalk.LogtalkObject;
+import org.jpc.engine.prolog.PrologEngine;
 import org.jpc.examples.metro.model.Line;
 import org.jpc.examples.metro.model.Metro;
 import org.jpc.examples.metro.model.hlapi.converters.LineConverter;
@@ -26,12 +27,19 @@ public class MetroHLApi implements Metro {
 		.register(new LineConverter())
 		.register(new StationConverter()).build();
 
+	
+	private final PrologEngine prologEngine;
+	
+	public MetroHLApi() {
+		prologEngine = getPrologEngine(getClass());
+	}
+	
 	@Override
 	public String toString() {return "metro";}
 	
 	
 	private LogtalkObject<Atom> asLogtalkObject() {
-		return new LogtalkObject<>(this, getPrologEngine(), jpcContext);
+		return new LogtalkObject<>(this, prologEngine, jpcContext);
 	}
 	
 	@Override

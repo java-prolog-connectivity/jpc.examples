@@ -1,12 +1,13 @@
 package org.jpc.examples.metro.model.llapi;
 
 import static java.util.Arrays.asList;
-import static org.jpc.engine.provider.PrologEngineProviderManager.getPrologEngine;
+import static org.jpc.engine.prolog.PrologEngines.getPrologEngine;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.jpc.engine.logtalk.LogtalkConstants;
+import org.jpc.engine.prolog.PrologEngine;
 import org.jpc.examples.metro.model.Line;
 import org.jpc.examples.metro.model.Metro;
 import org.jpc.examples.metro.model.hlapi.converters.LineConverter;
@@ -21,6 +22,13 @@ public class MetroLLApi implements Metro {
 
 	public static final String METRO_ATOM_NAME = "metro";
 	
+	
+	private final PrologEngine prologEngine;
+	
+	public MetroLLApi() {
+		prologEngine = getPrologEngine(getClass());
+	}
+	
 	@Override
 	public String toString() {return METRO_ATOM_NAME;}
 	
@@ -33,7 +41,7 @@ public class MetroLLApi implements Metro {
 		String lineVarName = "Line";
 		Term message = new Compound(LineConverter.LINE_FUNCTOR_NAME, asList(new Var(lineVarName)));
 		Term goal = new Compound(LogtalkConstants.LOGTALK_OPERATOR, asList(asTerm(), message));
-		Query query = getPrologEngine().query(goal);
+		Query query = prologEngine.query(goal);
 		List<Solution> solutions = query.allSolutions();
 		List<Line> lines = new ArrayList<>();
 		for(Solution solution : solutions) {
@@ -48,7 +56,7 @@ public class MetroLLApi implements Metro {
 	public Line line(String name) {
 		Term message = new Compound(LineConverter.LINE_FUNCTOR_NAME, asList(new Atom(name)));
 		Term goal = new Compound(LogtalkConstants.LOGTALK_OPERATOR, asList(asTerm(), message));
-		Query query = getPrologEngine().query(goal);
+		Query query = prologEngine.query(goal);
 		query.oneSolutionOrThrow();
 		return new LineLLApi(name);
 	}
