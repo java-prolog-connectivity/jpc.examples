@@ -2,7 +2,6 @@ package org.jpc.examples.metro.model.llapi;
 
 import static java.util.Arrays.asList;
 import static org.jpc.engine.prolog.PrologEngines.getPrologEngine;
-import static org.jpc.examples.metro.model.hlapi.MetroHLApi.jpcContext;
 import static org.jpc.term.Var.ANONYMOUS_VAR;
 
 import java.util.ArrayList;
@@ -68,7 +67,7 @@ public class StationLLApi implements Station {
 	@Override
 	public Station connected(Line line) {
 		String stationVarName = "Station";
-		Term message = jpcContext.toCompound("connected", asList(new Var(stationVarName), line));
+		Term message = new Compound("connected", asList(new Var(stationVarName), ((LineLLApi)line).asTerm()));
 		Term goal = new Compound(LogtalkConstants.LOGTALK_OPERATOR, asList(asTerm(), message));
 		Query query = prologEngine.query(goal);
 		Term stationTerm = query.oneSolutionOrThrow().get(stationVarName);
@@ -121,7 +120,7 @@ public class StationLLApi implements Station {
 
 	@Override
 	public boolean reachable(Station station) {
-		Term message = jpcContext.toCompound("reachable", asList(station));
+		Term message = new Compound("reachable", asList(((StationLLApi)station).asTerm()));
 		Term goal = new Compound(LogtalkConstants.LOGTALK_OPERATOR, asList(asTerm(), message));
 		Query query = prologEngine.query(goal);
 		return query.hasSolution();
@@ -138,7 +137,7 @@ public class StationLLApi implements Station {
 	@Override
 	public List<Station> intermediateStations(Station station) {
 		String stationsVarName = "Stations";
-		Term message = jpcContext.toCompound("reachable", asList(station, new Var(stationsVarName)));
+		Term message = new Compound("reachable", asList(((StationLLApi)station).asTerm(), new Var(stationsVarName)));
 		Term goal = new Compound(LogtalkConstants.LOGTALK_OPERATOR, asList(asTerm(), message));
 		Query query = prologEngine.query(goal);
 		Term stationsList = query.oneSolutionOrThrow().get(stationsVarName);
