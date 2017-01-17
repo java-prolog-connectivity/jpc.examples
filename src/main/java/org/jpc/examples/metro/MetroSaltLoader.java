@@ -6,8 +6,8 @@ import static org.jpc.examples.metro.model.hlapi.converters.LineConverter.LINE_F
 import static org.jpc.examples.metro.model.hlapi.converters.StationConverter.STATION_FUNCTOR_NAME;
 
 import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.net.URL;
 
 import org.jpc.engine.prolog.PrologEngine;
 import org.jpc.salt.PrologEngineWriter;
@@ -27,13 +27,12 @@ public class MetroSaltLoader {
 	}
 
 	public void load() {
-		File resourceFile = new File(getClass().getClassLoader().getResource(DEFAULT_DATA_FILE).getFile());
-		load(resourceFile);
+		load(getClass().getClassLoader().getResource(DEFAULT_DATA_FILE));
 	}
 	
-	public void load(File resourceFile) {
+	public void load(URL resourceUrl) {
 		PrologWriter writer = new PrologEngineWriter(prologEngine);
-		try(BufferedReader br = new BufferedReader(new FileReader(resourceFile));) {
+		try(BufferedReader br = new BufferedReader(new InputStreamReader(resourceUrl.openStream()));) {
 			String line = br.readLine();
 			writer.followingDirectives();
 			while(line != null) {
