@@ -10,8 +10,8 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 import org.jpc.engine.prolog.PrologEngine;
-import org.jpc.salt.PrologEngineWriter;
-import org.jpc.salt.PrologWriter;
+import org.jpc.util.salt.PrologContentHandler;
+import org.jpc.util.salt.PrologEngineWriter;
 
 /**
  * An alternative (shorter) implementation for a data loader using the SALT library
@@ -31,14 +31,14 @@ public class MetroSaltLoader {
 	}
 	
 	public void load(URL resourceUrl) {
-		PrologWriter writer = new PrologEngineWriter(prologEngine);
+		PrologContentHandler writer = new PrologContentHandler(new PrologEngineWriter(prologEngine));
 		try(BufferedReader br = new BufferedReader(new InputStreamReader(resourceUrl.openStream()));) {
 			String line = br.readLine();
 			writer.followingDirectives();
-			while(line != null) {
+			while (line != null) {
 				line = line.trim();
-				if(!line.isEmpty()) {
-					if(line.startsWith(METRO_LINE_MARKER)) {
+				if (!line.isEmpty()) {
+					if (line.startsWith(METRO_LINE_MARKER)) {
 						String lineName = line.substring(METRO_LINE_MARKER.length());
 						writer.startLogtalkObjectContext();
 						writer.startCompound().startAtom(LINE_FUNCTOR_NAME).startAtom(lineName).endCompound();

@@ -7,8 +7,6 @@ import static org.junit.Assert.fail;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import org.jpc.examples.metro.model.Line;
-import org.jpc.examples.metro.model.Metro;
 import org.junit.Test;
 
 public class MetroTest extends AbstractMetroTest {
@@ -19,7 +17,7 @@ public class MetroTest extends AbstractMetroTest {
 		Metro metro = metro();
 		List<Line> lines = metro.lines();
 		assertNotNull(lines);
-		assertEquals(lines.size(), 6);
+		assertEquals(6, lines.size());
 		
 //		System.out.println("Number of lines: " + lines.size());
 //		System.out.print("Lines: ");
