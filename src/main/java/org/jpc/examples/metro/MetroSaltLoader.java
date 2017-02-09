@@ -11,7 +11,7 @@ import java.net.URL;
 
 import org.jpc.engine.prolog.PrologEngine;
 import org.jpc.util.salt.PrologContentHandler;
-import org.jpc.util.salt.PrologEngineWriter;
+import org.jpc.util.termprocessor.PrologEngineWriter;
 
 /**
  * An alternative (shorter) implementation for a data loader using the SALT library
