@@ -2,7 +2,7 @@ package org.jpc.examples.metro.model.llapi;
 
 import static java.util.Arrays.asList;
 import static org.jpc.engine.prolog.PrologEngines.getPrologEngine;
-import static org.jpc.term.Var.ANONYMOUS_VAR;
+import static org.jpc.term.Var.dontCare;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +58,7 @@ public class StationLLApi implements Station {
 
 	@Override
 	public long numberConnections() {
-		Term message = new Compound("connected", asList(ANONYMOUS_VAR));
+		Term message = new Compound("connected", asList(dontCare()));
 		Term goal = new Compound(LogtalkConstants.LOGTALK_OPERATOR, asList(asTerm(), message));
 		Query query = prologEngine.query(goal);
 		return query.numberOfSolutions();
@@ -98,7 +98,7 @@ public class StationLLApi implements Station {
 
 	@Override
 	public long numberNearbyStations() {
-		Term message = new Compound("nearby", asList(ANONYMOUS_VAR));
+		Term message = new Compound("nearby", asList(dontCare()));
 		Term goal = new Compound(LogtalkConstants.LOGTALK_OPERATOR, asList(asTerm(), message));
 		Query query = prologEngine.query(goal);
 		return query.numberOfSolutions();
@@ -128,7 +128,7 @@ public class StationLLApi implements Station {
 
 	@Override
 	public long numberReachableStations() {
-		Term message = new Compound("reachable", asList(ANONYMOUS_VAR));
+		Term message = new Compound("reachable", asList(dontCare()));
 		Term goal = new Compound(LogtalkConstants.LOGTALK_OPERATOR, asList(asTerm(), message));
 		Query query = prologEngine.query(goal);
 		return query.numberOfSolutions();

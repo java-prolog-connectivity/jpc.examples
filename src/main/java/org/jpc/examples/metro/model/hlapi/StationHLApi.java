@@ -3,7 +3,7 @@ package org.jpc.examples.metro.model.hlapi;
 import static java.util.Arrays.asList;
 import static org.jpc.engine.prolog.PrologEngines.getPrologEngine;
 import static org.jpc.examples.metro.model.hlapi.MetroHLApi.jpcContext;
-import static org.jpc.term.Var.ANONYMOUS_VAR;
+import static org.jpc.term.Var.dontCare;
 
 import java.util.List;
 
@@ -47,7 +47,7 @@ public class StationHLApi implements Station {
 
 	@Override
 	public long numberConnections() {
-		Term message = new Compound("connected", asList(ANONYMOUS_VAR));
+		Term message = new Compound("connected", asList(dontCare()));
 		return asLogtalkObject().perform(message).numberOfSolutions();
 	}
 
@@ -75,7 +75,7 @@ public class StationHLApi implements Station {
 
 	@Override
 	public long numberNearbyStations() {
-		Term message = new Compound("nearby", asList(ANONYMOUS_VAR));
+		Term message = new Compound("nearby", asList(dontCare()));
 		Query query = asLogtalkObject().perform(message);
 		return query.numberOfSolutions();
 	}
@@ -96,7 +96,7 @@ public class StationHLApi implements Station {
 
 	@Override
 	public long numberReachableStations() {
-		Term message = new Compound("reachable", asList(ANONYMOUS_VAR));
+		Term message = new Compound("reachable", asList(dontCare()));
 		return asLogtalkObject().perform(message).numberOfSolutions();
 	}
 

@@ -2,7 +2,7 @@ package org.jpc.examples.metro.model.llapi;
 
 import static java.util.Arrays.asList;
 import static org.jpc.engine.prolog.PrologEngines.getPrologEngine;
-import static org.jpc.term.Var.ANONYMOUS_VAR;
+import static org.jpc.term.Var.dontCare;
 
 import org.jpc.engine.logtalk.LogtalkConstants;
 import org.jpc.engine.prolog.PrologEngine;
@@ -53,7 +53,7 @@ public class LineLLApi implements Line {
 
 	@Override
 	public long segments() {
-		Term message = new Compound("connects", asList(ANONYMOUS_VAR, ANONYMOUS_VAR));
+		Term message = new Compound("connects", asList(dontCare(), dontCare()));
 		Term goal = new Compound(LogtalkConstants.LOGTALK_OPERATOR, asList(asTerm(), message));
 		Query query = prologEngine.query(goal);
 		return query.numberOfSolutions();
