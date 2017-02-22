@@ -1,10 +1,10 @@
 package org.jpc.examples.metro.model.hlapi.converters;
 
 import static java.util.Arrays.asList;
+import static org.jconverter.converter.ConversionGoal.conversionGoal;
 
-import java.lang.reflect.Type;
-
-import org.jconverter.converter.ConversionException;
+import org.jconverter.converter.DelegateConversionException;
+import org.jconverter.converter.TypeDomain;
 import org.jpc.Jpc;
 import org.jpc.converter.FromTermConverter;
 import org.jpc.converter.ToTermConverter;
@@ -18,14 +18,14 @@ public class LineConverter implements ToTermConverter<Line, Compound>, FromTermC
 	public static final String LINE_FUNCTOR_NAME = "line";
 	
 	@Override
-	public Compound toTerm(Line line, Class<Compound> termClass, Jpc context) {
+	public Compound toTerm(Line line, TypeDomain target, Jpc context) {
 		return new Compound(LINE_FUNCTOR_NAME, asList(new Atom(line.getName())));
 	}
 	
 	@Override
-	public Line fromTerm(Compound term, Type type, Jpc context) {
+	public Line fromTerm(Compound term, TypeDomain target, Jpc context) {
 		if(!term.hasFunctor(LINE_FUNCTOR_NAME, 1))
-			throw new ConversionException();
+			throw new DelegateConversionException(conversionGoal(term, target));
 		String lineName = ((Atom)term.arg(1)).getName();
 		return new LineHLApi(lineName);
 	}
